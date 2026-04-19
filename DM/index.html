@@ -1,23 +1,89 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="de">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>JMS – DM</title>
-  <link rel="stylesheet" href="./style.css">
-</head>
-<body>
-  <header>
-    <h1>Bereich DM</h1>
-    <p>Hier entsteht die Drogerie-App.</p>
-  </header>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Drogerie-Training</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <main class="app-shell">
+      <section class="topbar" aria-labelledby="app-title">
+        <div>
+          <p class="eyebrow">Jakob-Muth-Schule Nürnberg</p>
+          <h1 id="app-title">Drogerie-Training</h1>
+          <p class="intro">Ware erkennen, Regale ordnen, Haltbarkeit prüfen, Express-Bestellungen packen und Kundengespräche üben.</p>
+        </div>
 
-  <main>
-    <img src="./bilder/platzhalter-dm.jpg" alt="Platzhalterbild für DM">
-    <p>Dieser Bereich wird schrittweise mit Inhalten aufgebaut.</p>
-    <p><a href="../index.html">Zurück zur Startseite</a></p>
-  </main>
+        <div class="voice-panel" aria-label="Sprachausgabe">
+          <button class="secondary-button" id="voice-test" type="button">Stimme testen</button>
+          <label class="voice-toggle">
+            <input id="auto-speak" type="checkbox" checked>
+            <span>Automatisch sprechen</span>
+          </label>
+        </div>
+      </section>
 
-  <script src="./app.js"></script>
-</body>
+      <nav class="mode-tabs" aria-label="Lernmodus auswählen">
+        <button class="tab active" type="button" data-mode="learn">Lernen</button>
+        <button class="tab" type="button" data-mode="category">Überbegriffe</button>
+        <button class="tab" type="button" data-mode="express">Express</button>
+        <button class="tab" type="button" data-mode="date">MHD</button>
+        <button class="tab" type="button" data-mode="display">Aufsteller</button>
+        <button class="tab" type="button" data-mode="dialog">Dialog</button>
+      </nav>
+
+      <section class="status-band" aria-live="polite">
+        <div>
+          <p class="status-label">Aktuelle Aufgabe</p>
+          <p class="task-text" id="task-text">Tippe eine Karte an, um Aufgabe und Begriff zu hören.</p>
+        </div>
+        <div class="score-box">
+          <span id="score">0</span>
+          <small>Punkte</small>
+        </div>
+      </section>
+
+      <section class="controls" aria-label="Training steuern">
+        <button class="primary-button" id="repeat" type="button">Nochmal hören</button>
+        <button class="secondary-button" id="next" type="button">Neue Aufgabe</button>
+        <select id="level-filter" aria-label="Auswahl">
+          <option value="starter">Start: wichtige Aufgaben</option>
+          <option value="core">Mehr Produkte</option>
+          <option value="all">Alles üben</option>
+        </select>
+      </section>
+
+      <section class="activity-panel" id="activity-panel" aria-label="Lernbereich"></section>
+
+      <section class="feedback" id="feedback" aria-live="assertive">Bereit.</section>
+
+      <section class="coach-box" aria-labelledby="coach-title">
+        <div>
+          <p class="eyebrow">Trainer-Ideen</p>
+          <h2 id="coach-title">So kann geübt werden</h2>
+        </div>
+        <div class="coach-grid">
+          <article>
+            <h3>Erst zeigen, dann fragen</h3>
+            <p>Im Lernmodus hört die Gruppe Begriffe und kurze Arbeitsschritte. Danach passt das Quiz dazu.</p>
+          </article>
+          <article>
+            <h3>Dialoge laut sprechen</h3>
+            <p>Eine Person liest die Kundin, eine Person antwortet. Die App liest bei Bedarf vor.</p>
+          </article>
+          <article>
+            <h3>Regalrunde im Markt</h3>
+            <p>Nach dem Üben gehen die Praktikanten zum echten Regal und suchen dieselben Überbegriffe.</p>
+          </article>
+        </div>
+      </section>
+
+      <footer class="site-credit">
+        Erstellt für die Jakob-Muth-Schule Nürnberg · Rolfy Hientz · hientzr@jms.lhnbg.de
+      </footer>
+    </main>
+
+    <script src="app.js"></script>
+  </body>
 </html>
