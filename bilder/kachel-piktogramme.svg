@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1408 768" role="img" aria-labelledby="title desc">
+  <title id="title">Piktogramme</title>
+  <desc id="desc">Symbolkarten mit einfachen Piktogrammen.</desc>
+  <rect width="1408" height="768" fill="#f8f9fa"/>
+  <g stroke="#ced4da" stroke-width="8">
+    <rect x="194" y="154" width="240" height="240" rx="8" fill="#ffffff"/>
+    <rect x="484" y="154" width="240" height="240" rx="8" fill="#ffffff"/>
+    <rect x="774" y="154" width="240" height="240" rx="8" fill="#ffffff"/>
+    <rect x="1064" y="154" width="240" height="240" rx="8" fill="#ffffff"/>
+  </g>
+  <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="314" cy="250" r="34" fill="#2a9d8f"/>
+    <path d="M314 300 L314 350 M262 324 L366 324" stroke="#2a9d8f" stroke-width="22"/>
+    <path d="M564 310 L644 230 L684 310 Z" fill="#e63946"/>
+    <rect x="556" y="310" width="136" height="50" rx="8" fill="#e63946"/>
+    <circle cx="894" cy="274" r="72" fill="#ffbe0b"/>
+    <path d="M858 274 L884 300 L932 244" stroke="#ffffff" stroke-width="22"/>
+    <path d="M1138 334 L1230 214 M1138 214 L1230 334" stroke="#457b9d" stroke-width="28"/>
+  </g>
+  <g stroke="#ced4da" stroke-width="8">
+    <rect x="340" y="430" width="240" height="126" rx="8" fill="#ffffff"/>
+    <rect x="626" y="430" width="240" height="126" rx="8" fill="#ffffff"/>
+    <rect x="912" y="430" width="240" height="126" rx="8" fill="#ffffff"/>
+  </g>
+  <rect x="388" y="476" width="144" height="34" rx="8" fill="#6c757d"/>
+  <circle cx="746" cy="493" r="38" fill="#f77f00"/>
+  <path d="M988 510 L1030 462 L1072 510 Z" fill="#8338ec"/>
+  <text x="704" y="690" text-anchor="middle" font-family="Arial, sans-serif" font-size="72" font-weight="700" fill="#1f2937">Piktogramme</text>
+</svg>

@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1408 768" role="img" aria-labelledby="title desc">
+  <title id="title">Grundwerkzeuge</title>
+  <desc id="desc">Einfache Werkzeuge auf einer Arbeitsflaeche.</desc>
+  <rect width="1408" height="768" fill="#edf6f9"/>
+  <rect x="132" y="142" width="1144" height="444" rx="8" fill="#ffffff" stroke="#b8c7d9" stroke-width="10"/>
+  <g transform="translate(270 225) rotate(-18)">
+    <rect x="0" y="96" width="350" height="58" rx="8" fill="#f6bd60"/>
+    <rect x="18" y="110" width="315" height="10" fill="#fff3c4" opacity=".8"/>
+    <path d="M350 96 L454 40 L486 96 L382 154 Z" fill="#3d405b"/>
+    <path d="M454 40 L520 4 L550 58 L486 96 Z" fill="#6b7280"/>
+  </g>
+  <g transform="translate(760 215) rotate(16)">
+    <rect x="80" y="140" width="340" height="58" rx="8" fill="#4d908e"/>
+    <path d="M58 104 C118 54 190 58 246 112 L204 154 C174 126 130 126 100 154 Z" fill="#577590"/>
+    <rect x="360" y="124" width="90" height="90" rx="8" fill="#577590"/>
+    <circle cx="396" cy="170" r="16" fill="#edf6f9"/>
+  </g>
+  <g transform="translate(504 398)">
+    <rect x="0" y="0" width="400" height="54" rx="8" fill="#e76f51"/>
+    <rect x="40" y="12" width="28" height="30" fill="#ffffff" opacity=".75"/>
+    <rect x="96" y="12" width="28" height="30" fill="#ffffff" opacity=".75"/>
+    <rect x="152" y="12" width="28" height="30" fill="#ffffff" opacity=".75"/>
+    <rect x="208" y="12" width="28" height="30" fill="#ffffff" opacity=".75"/>
+    <rect x="264" y="12" width="28" height="30" fill="#ffffff" opacity=".75"/>
+    <rect x="320" y="12" width="28" height="30" fill="#ffffff" opacity=".75"/>
+  </g>
+  <text x="704" y="690" text-anchor="middle" font-family="Arial, sans-serif" font-size="72" font-weight="700" fill="#1f2937">Grundwerkzeuge</text>
+</svg>

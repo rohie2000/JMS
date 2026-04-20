@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1408 768" role="img" aria-labelledby="title desc">
+  <title id="title">Lernwerkstatt</title>
+  <desc id="desc">Arbeitsmaterialien auf einem Tisch.</desc>
+  <rect width="1408" height="768" fill="#f1faee"/>
+  <rect x="122" y="484" width="1164" height="120" rx="8" fill="#8d99ae"/>
+  <rect x="188" y="154" width="344" height="320" rx="8" fill="#ffffff" stroke="#3a86ff" stroke-width="12"/>
+  <rect x="230" y="216" width="260" height="28" rx="8" fill="#a8dadc"/>
+  <rect x="230" y="278" width="210" height="28" rx="8" fill="#ffbe0b"/>
+  <rect x="230" y="340" width="244" height="28" rx="8" fill="#f28482"/>
+  <rect x="638" y="170" width="250" height="250" rx="8" fill="#ffd166"/>
+  <circle cx="764" cy="296" r="70" fill="#ffffff"/>
+  <path d="M724 298 L756 330 L814 256" fill="none" stroke="#2a9d8f" stroke-width="22" stroke-linecap="round" stroke-linejoin="round"/>
+  <g transform="translate(960 178)">
+    <rect x="0" y="46" width="240" height="212" rx="8" fill="#457b9d"/>
+    <rect x="28" y="0" width="184" height="74" rx="8" fill="#e63946"/>
+    <rect x="44" y="92" width="152" height="24" rx="8" fill="#ffffff" opacity=".86"/>
+    <rect x="44" y="146" width="132" height="24" rx="8" fill="#ffffff" opacity=".86"/>
+  </g>
+  <text x="704" y="690" text-anchor="middle" font-family="Arial, sans-serif" font-size="72" font-weight="700" fill="#1f2937">Lernwerkstatt</text>
+</svg>
