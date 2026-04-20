@@ -84,8 +84,29 @@ body {
 }
 
 .fussbereich {
-  text-align: center;
-  padding: 1rem;
-  background-color: #e5e7eb;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem 2rem 1rem;
+}
+
+.fusskarte {
+  background-color: #e9eef4;
+  border-radius: 8px;
   color: #374151;
+  padding: 1.25rem;
+  text-align: center;
+}
+
+.fusskarte p {
+  margin: 0;
+  line-height: 1.5;
+}
+
+.fusskarte p + p {
+  margin-top: 0.4rem;
+}
+
+.fusskarte a {
+  color: #374151;
+  font-weight: 700;
 }
