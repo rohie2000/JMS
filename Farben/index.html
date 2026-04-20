@@ -12,7 +12,7 @@
       <div>
         <p class="eyebrow">Jakob-Muth-Schule Nürnberg</p>
         <h1 id="app-title">Farben</h1>
-        <p class="intro">Schön, dass du hier bist.</p>
+        <p class="intro">Schön, dass du hier bist. Übe Grundfarben, höre Farbnamen und entdecke ähnliche Farbtöne.</p>
       </div>
 
       <div class="voice-panel" aria-label="Sprachausgabe">
@@ -26,17 +26,16 @@
 
     <nav class="mode-tabs" aria-label="Lernmodus auswählen">
       <button class="tab active" type="button" data-mode="learn">Lernen</button>
-      <button class="tab" type="button" data-mode="category">Überbegriffe</button>
-      <button class="tab" type="button" data-mode="express">Express</button>
-      <button class="tab" type="button" data-mode="date">MHD</button>
-      <button class="tab" type="button" data-mode="display">Aufsteller</button>
-      <button class="tab" type="button" data-mode="dialog">Dialog</button>
+      <button class="tab" type="button" data-mode="find">Farbe finden</button>
+      <button class="tab" type="button" data-mode="listen">Hören</button>
+      <button class="tab" type="button" data-mode="sequence">Reihenfolge</button>
+      <button class="tab" type="button" data-mode="family">Farbfamilie</button>
     </nav>
 
     <section class="status-band" aria-live="polite">
       <div>
         <p class="status-label">Aktuelle Aufgabe</p>
-        <p class="task-text" id="task-text">Tippe eine Karte an, um Aufgabe und Begriff zu hören.</p>
+        <p class="task-text" id="task-text">Tippe eine Farbe an, um den Namen zu hören.</p>
       </div>
       <div class="score-box">
         <span id="score">0</span>
@@ -47,10 +46,11 @@
     <section class="controls" aria-label="Training steuern">
       <button class="primary-button" id="repeat" type="button">Nochmal hören</button>
       <button class="secondary-button" id="next" type="button">Neue Aufgabe</button>
-      <select id="level-filter" aria-label="Auswahl">
-        <option value="starter">Start: wichtige Aufgaben</option>
-        <option value="core">Mehr Produkte</option>
-        <option value="all">Alles üben</option>
+      <select id="level-filter" aria-label="Schwierigkeit auswählen">
+        <option value="basic">Grundfarben</option>
+        <option value="more">Mehr Farben</option>
+        <option value="shades">Farbtöne</option>
+        <option value="all">Alle Farben</option>
       </select>
     </section>
 
