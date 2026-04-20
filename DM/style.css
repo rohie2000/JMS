@@ -174,14 +174,15 @@ select {
   align-items: center;
   gap: 18px;
   padding: 20px 24px;
-  background: linear-gradient(135deg, var(--dark), #172131);
-  color: #ffffff;
+  background: #ffffff;
+  color: var(--ink);
+  border: 2px solid var(--school);
   border-radius: 8px;
 }
 
 .status-label {
   margin: 0 0 6px;
-  color: #cfdbdc;
+  color: var(--ink);
   font-size: 0.84rem;
   font-weight: 800;
   text-transform: uppercase;
@@ -199,7 +200,7 @@ select {
   place-items: center;
   width: 88px;
   min-height: 78px;
-  border: 1px solid rgba(255, 255, 255, 0.24);
+  border: 1px solid var(--school);
   border-radius: 8px;
 }
 
@@ -210,7 +211,7 @@ select {
 }
 
 .score-box small {
-  color: #cfdbdc;
+  color: var(--ink);
 }
 
 .controls {
