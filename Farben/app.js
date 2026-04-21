@@ -25,6 +25,162 @@ const colors = [
   { name: "Beige", hex: "#e6ccb2", family: "Braun", level: "shades" }
 ];
 
+const objectPrompts = [
+  {
+    name: "Kochplatte",
+    article: "die",
+    answer: "Schwarz",
+    options: ["Schwarz", "Grau", "Rot", "Weiß"],
+    speak: "Welche Farbe hat die Kochplatte?",
+    kind: "object",
+    svg: "stove"
+  },
+  {
+    name: "Feuerlöscher",
+    article: "der",
+    answer: "Rot",
+    options: ["Rot", "Orange", "Grau", "Blau"],
+    speak: "Welche Farbe hat der Feuerlöscher?",
+    kind: "object",
+    svg: "extinguisher"
+  },
+  {
+    name: "Fußgängerschild",
+    article: "das",
+    answer: "Blau",
+    options: ["Blau", "Grün", "Grau", "Rot"],
+    speak: "Welche Farbe hat das Fußgängerschild?",
+    kind: "object",
+    svg: "pedestrian"
+  },
+  {
+    name: "Tafel",
+    article: "die",
+    answer: "Grün",
+    options: ["Grün", "Schwarz", "Blau", "Braun"],
+    speak: "Welche Farbe hat die Tafel?",
+    kind: "object",
+    svg: "board"
+  },
+  {
+    name: "Zebrastreifen",
+    article: "der",
+    answer: "Weiß",
+    options: ["Weiß", "Grau", "Gelb", "Rot"],
+    speak: "Welche Farbe hat der Zebrastreifen?",
+    kind: "object",
+    svg: "crossing"
+  },
+  {
+    name: "Elefant",
+    article: "der",
+    answer: "Grau",
+    options: ["Grau", "Braun", "Schwarz", "Blau"],
+    speak: "Welche Farbe hat der Elefant?",
+    kind: "animal",
+    svg: "elephant"
+  },
+  {
+    name: "Katze",
+    article: "die",
+    answer: "Braun",
+    options: ["Braun", "Grau", "Schwarz", "Weiß"],
+    speak: "Welche Farbe hat die Katze?",
+    kind: "animal",
+    svg: "cat"
+  },
+  {
+    name: "Hund",
+    article: "der",
+    answer: "Braun",
+    options: ["Braun", "Schwarz", "Grau", "Weiß"],
+    speak: "Welche Farbe hat der Hund?",
+    kind: "animal",
+    svg: "dog"
+  },
+  {
+    name: "Zebra",
+    article: "das",
+    answer: "Schwarz",
+    options: ["Schwarz", "Weiß", "Grau", "Braun"],
+    speak: "Welche Farbe hat das Zebra?",
+    kind: "animal",
+    svg: "zebra"
+  },
+  {
+    name: "Frosch",
+    article: "der",
+    answer: "Grün",
+    options: ["Grün", "Gelb", "Braun", "Blau"],
+    speak: "Welche Farbe hat der Frosch?",
+    kind: "animal",
+    svg: "frog"
+  },
+  {
+    name: "Biene",
+    article: "die",
+    answer: "Gelb",
+    options: ["Gelb", "Schwarz", "Orange", "Braun"],
+    speak: "Welche Farbe hat die Biene?",
+    kind: "animal",
+    svg: "bee"
+  },
+  {
+    name: "Jeans",
+    article: "die",
+    answer: "Blau",
+    options: ["Blau", "Grau", "Schwarz", "Braun"],
+    speak: "Welche Farbe hat die Jeans?",
+    kind: "object",
+    svg: "jeans"
+  },
+  {
+    name: "Brötchen",
+    article: "das",
+    answer: "Braun",
+    options: ["Braun", "Beige", "Gelb", "Weiß"],
+    speak: "Welche Farbe hat das Brötchen?",
+    kind: "object",
+    svg: "bread"
+  },
+  {
+    name: "Banane",
+    article: "die",
+    answer: "Gelb",
+    options: ["Gelb", "Grün", "Orange", "Braun"],
+    speak: "Welche Farbe hat die Banane?",
+    kind: "object",
+    svg: "banana"
+  },
+  {
+    name: "Orange",
+    article: "die",
+    answer: "Orange",
+    options: ["Orange", "Gelb", "Rot", "Grün"],
+    speak: "Welche Farbe hat die Orange?",
+    kind: "object",
+    svg: "orangefruit"
+  },
+  {
+    name: "Avocado",
+    article: "die",
+    answer: "Grün",
+    options: ["Grün", "Braun", "Gelb", "Schwarz"],
+    speak: "Welche Farbe hat die Avocado?",
+    kind: "object",
+    svg: "avocado"
+  },
+  {
+    name: "Tomate",
+    article: "die",
+    answer: "Rot",
+    options: ["Rot", "Orange", "Grün", "Gelb"],
+    speak: "Welche Farbe hat die Tomate?",
+    kind: "object",
+    svg: "tomato"
+  }
+];
+
 const levelGroups = {
   basic: ["basic"],
   more: ["basic", "more"],
@@ -33,11 +189,15 @@ const levelGroups = {
 };
 
 const state = {
-  mode: "learn",
+  mode: "object",
   level: "basic",
   score: 0,
   current: null,
   voices: [],
+  speechUnlocked: false,
+  pendingSpeech: null,
+  speechToken: 0,
+  objectStarted: false,
   sequenceIndex: 0,
   sequence: []
 };
@@ -57,22 +217,80 @@ function activeColors() {
   return colors.filter((color) => levelGroups[state.level].includes(color.level));
 }
 
-function speak(text) {
+function flushPendingSpeech() {
+  if (!state.pendingSpeech) {
+    return;
+  }
+  const pending = state.pendingSpeech;
+  state.pendingSpeech = null;
+  window.setTimeout(() => speak(pending.text, true, pending.options), 80);
+}
+
+function unlockSpeech() {
+  if (!("speechSynthesis" in window)) {
+    return;
+  }
+  state.speechUnlocked = true;
+  window.speechSynthesis.resume();
+  flushPendingSpeech();
+}
+
+function queueSpeech(text, options = {}) {
+  state.pendingSpeech = { text, options };
+}
+
+function speak(text, bypassLock = false, options = {}) {
+  const { interrupt = true, onend = null } = options;
+
   if (!("speechSynthesis" in window)) {
     setFeedback("Dieser Browser unterstützt hier keine Sprachausgabe.", "try");
     return;
   }
 
-  window.speechSynthesis.cancel();
+  if (!state.speechUnlocked && !bypassLock) {
+    queueSpeech(text, options);
+    return;
+  }
+
+  if (interrupt) {
+    window.speechSynthesis.cancel();
+  }
+  window.speechSynthesis.resume();
   const utterance = new SpeechSynthesisUtterance(text);
+  const token = ++state.speechToken;
   utterance.lang = "de-DE";
   utterance.rate = 0.9;
   utterance.pitch = 1;
+  utterance.volume = 1;
   const germanVoice = state.voices.find((voice) => voice.lang.toLowerCase().startsWith("de"));
   if (germanVoice) {
     utterance.voice = germanVoice;
   }
+  utterance.onend = () => {
+    if (token !== state.speechToken) {
+      return;
+    }
+    if (typeof onend === "function") {
+      onend();
+    }
+  };
+  utterance.onerror = () => {
+    setFeedback("Die Sprachausgabe konnte gerade nicht gestartet werden.", "try");
+    if (typeof onend === "function") {
+      onend();
+    }
+  };
   window.speechSynthesis.speak(utterance);
+}
+
+function speakAndContinue(text, callback, pause = 700) {
+  speak(text, false, {
+    onend: () => {
+      window.setTimeout(() => {
+        callback();
+      }, pause);
+    }
+  });
 }
 
 function setFeedback(text, kind = "") {
@@ -123,13 +341,33 @@ function colorButton(color, onClick, hideName = false) {
   const name = document.createElement("strong");
   name.textContent = hideName ? "Welche Farbe ist das?" : color.name;
 
-  const family = document.createElement("p");
-  family.className = "small-note";
-  family.textContent = `Farbfamilie: ${color.family}`;
-
-  button.append(name, family);
+  button.append(name);
   button.addEventListener("click", () => onClick(button, color));
   return button;
+}
+
+function colorByName(name) {
+  return colors.find((color) => color.name === name);
+}
+
+function promptImageSource(entry, revealed = false) {
+  return `bilder/${entry.svg}${revealed ? "" : "-grau"}.png`;
+}
+
+function createPromptCard(entry, revealed = false) {
+  const card = document.createElement("article");
+  card.className = `prompt-card ${revealed ? "revealed" : ""}`.trim();
+  card.innerHTML = `
+    <div class="prompt-visual">
+      <img class="prompt-image" src="${promptImageSource(entry, revealed)}" alt="${entry.name}">
+    </div>
+    <div class="prompt-copy">
+      <p class="item-meta">${entry.kind === "animal" ? "Tier" : "Alltag"}</p>
+      <h3>${entry.name}</h3>
+      <p class="small-note">${revealed ? `Jetzt siehst du ${entry.article} ${entry.name.toLowerCase()} in ${entry.answer}.` : `Das Bild ist zuerst grau. Welche Farbe hat ${entry.article} ${entry.name.toLowerCase()}?`}</p>
+    </div>
+  `;
+  return card;
 }
 
 function disableButtons() {
@@ -147,7 +385,7 @@ function drawLearn() {
 
   activeColors().forEach((color) => {
     panel.append(colorButton(color, (_button, selected) => {
-      setFeedback(`${selected.name}. Diese Farbe gehört zur Farbfamilie ${selected.family}.`, "good");
+      setFeedback(`${selected.name}.`, "good");
       speak(`${selected.name}.`);
     }));
   });
@@ -171,8 +409,7 @@ function drawFind() {
         addPoint();
         disableButtons();
         setFeedback(`Richtig. Das ist ${answer.name}.`, "good");
-        speak(`Richtig. Das ist ${answer.name}.`);
-        window.setTimeout(nextTask, 1300);
+        speakAndContinue(`Richtig. Das ist ${answer.name}.`, nextTask);
         return;
       }
       setFeedback(`Das war ${selected.name}. Suche ${answer.name}.`, "try");
@@ -203,8 +440,7 @@ function drawListen() {
         addPoint();
         disableButtons();
         setFeedback(`Sehr gut gehört. ${answer.name} ist richtig.`, "good");
-        speak(`Sehr gut gehört. ${answer.name} ist richtig.`);
-        window.setTimeout(nextTask, 1300);
+        speakAndContinue(`Sehr gut gehört. ${answer.name} ist richtig.`, nextTask);
         return;
       }
       setFeedback("Höre nochmal genau hin.", "try");
@@ -253,8 +489,7 @@ function drawSequence() {
         addPoint();
         disableButtons();
         setFeedback("Prima. Die Reihenfolge stimmt.", "good");
-        speak("Prima. Die Reihenfolge stimmt.");
-        window.setTimeout(nextTask, 1500);
+        speakAndContinue("Prima. Die Reihenfolge stimmt.", nextTask);
         return;
       }
 
@@ -269,38 +504,53 @@ function drawSequence() {
   }
 }
 
-function drawFamily() {
-  const all = activeColors();
-  const families = [...new Set(all.map((color) => color.family))];
-  const family = pickRandom(families);
-  const correct = all.filter((color) => color.family === family);
-  const answer = pickRandom(correct);
-  const options = shuffle([answer, ...shuffle(all.filter((color) => color.family !== family)).slice(0, 5)]);
-  state.current = { family, answer, prompt: `Welche Farbe gehört zur Farbfamilie ${family}?` };
-  panel.innerHTML = "";
-  panel.className = "activity-panel color-grid";
-  taskText.textContent = state.current.prompt;
-  setFeedback("Suche eine passende Farbe aus dieser Farbfamilie.");
+function drawObjectColor() {
+  const visibleColors = activeColors();
+  const availableNames = new Set(visibleColors.map((color) => color.name));
+  const candidates = objectPrompts.filter((entry) => availableNames.has(entry.answer));
+  const entry = !state.objectStarted
+    ? candidates.find((candidate) => candidate.svg === "banana") || pickRandom(candidates)
+    : pickRandom(candidates);
+  state.objectStarted = true;
+  const options = shuffle(entry.options)
+    .map((name) => visibleColors.find((color) => color.name === name))
+    .filter(Boolean)
+    .slice(0, 4);
 
+  if (!options.some((color) => color.name === entry.answer)) {
+    drawFind();
+    return;
+  }
+
+  state.current = { entry, prompt: entry.speak };
+  panel.innerHTML = "";
+  panel.className = "activity-panel object-layout";
+  taskText.textContent = entry.speak;
+  setFeedback("Wähle die richtige Farbe für das graue Bild.");
+  const promptCard = createPromptCard(entry);
+
+  const grid = document.createElement("div");
+  grid.className = "color-grid";
   options.forEach((color) => {
-    panel.append(colorButton(color, (button, selected) => {
-      const isCorrect = selected.family === family;
+    grid.append(colorButton(color, (button, selected) => {
+      const isCorrect = selected.name === entry.answer;
       button.classList.add(isCorrect ? "correct" : "wrong");
       if (isCorrect) {
         addPoint();
         disableButtons();
-        setFeedback(`${selected.name} passt zur Farbfamilie ${family}.`, "good");
-        speak(`${selected.name} passt zur Farbfamilie ${family}.`);
-        window.setTimeout(nextTask, 1300);
+        promptCard.replaceWith(createPromptCard(entry, true));
+        setFeedback(`Richtig. ${entry.article} ${entry.name} ist ${entry.answer}.`, "good");
+        speakAndContinue(`Richtig. ${entry.article} ${entry.name} ist ${entry.answer}.`, nextTask);
         return;
       }
-      setFeedback(`${selected.name} gehört zur Farbfamilie ${selected.family}.`, "try");
-      speak(`${selected.name} gehört zur Farbfamilie ${selected.family}.`);
+      setFeedback(`${selected.name} passt hier nicht. Versuche es noch einmal.`, "try");
+      speak(`${selected.name} passt hier nicht. Versuche es noch einmal.`);
     }));
   });
 
+  panel.append(promptCard, grid);
   if (autoSpeak.checked) {
-    speak(state.current.prompt);
+    speak(entry.speak);
   }
 }
 
@@ -317,8 +567,8 @@ function nextTask() {
     drawSequence();
     return;
   }
-  if (state.mode === "family") {
-    drawFamily();
+  if (state.mode === "object") {
+    drawObjectColor();
     return;
   }
   drawLearn();
@@ -384,6 +634,8 @@ levelFilter.addEventListener("change", (event) => {
 if ("speechSynthesis" in window) {
   loadVoices();
   window.speechSynthesis.addEventListener("voiceschanged", loadVoices);
+  window.addEventListener("pointerdown", unlockSpeech, { once: true });
+  window.addEventListener("keydown", unlockSpeech, { once: true });
 }
 
 drawLearn();
