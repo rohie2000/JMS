@@ -16,7 +16,6 @@
   --dark: #000000;
   --success: #1269b0;
   --warning: #8b3f90;
-  --blue: #1269b0;
   --shadow: 0 16px 36px rgba(18, 105, 176, 0.18);
 }
 
@@ -71,7 +70,6 @@ input {
   color: var(--accent);
   font-size: 0.84rem;
   font-weight: 800;
-  letter-spacing: 0;
   text-transform: uppercase;
 }
 
@@ -106,13 +104,9 @@ h3 {
 .intro {
   max-width: 58ch;
   margin: 14px 0 0;
-  color: var(--muted);
+  color: #eef4ff;
   font-size: 1.05rem;
   line-height: 1.5;
-}
-
-.topbar .intro {
-  color: #eef4ff;
 }
 
 .voice-panel,
@@ -132,7 +126,7 @@ h3 {
   align-items: center;
   gap: 8px;
   min-height: 44px;
-  color: var(--muted);
+  color: #ffffff;
   white-space: nowrap;
 }
 
@@ -210,10 +204,6 @@ select {
   line-height: 1;
 }
 
-.score-box small {
-  color: var(--ink);
-}
-
 .controls {
   margin: 18px 0;
 }
@@ -247,10 +237,6 @@ select {
   color: var(--accent-strong);
 }
 
-.topbar .voice-toggle {
-  color: #ffffff;
-}
-
 .activity-panel {
   min-height: 300px;
 }
@@ -264,12 +250,14 @@ select {
 .item-card,
 .answer-card,
 .dialog-card,
-.display-slot {
+.display-slot,
+.sentence-card {
   border-radius: 8px;
 }
 
 .item-card,
-.answer-card {
+.answer-card,
+.sentence-card {
   display: grid;
   gap: 10px;
   min-height: 268px;
@@ -283,20 +271,23 @@ select {
 }
 
 .item-card:hover,
-.answer-card:hover {
+.answer-card:hover,
+.sentence-card:hover {
   transform: translateY(-2px);
   box-shadow: 0 16px 30px rgba(18, 105, 176, 0.2);
 }
 
 .item-card.correct,
 .answer-card.correct,
-.display-slot.correct {
+.display-slot.correct,
+.sentence-card.correct {
   border-color: var(--success);
 }
 
 .item-card.wrong,
 .answer-card.wrong,
-.display-slot.wrong {
+.display-slot.wrong,
+.sentence-card.wrong {
   border-color: var(--warning);
 }
 
@@ -324,10 +315,11 @@ select {
 
 .item-meta,
 .item-task,
-.small-note {
+.small-note,
+.sentence-text {
   margin: 0;
   color: var(--muted);
-  line-height: 1.36;
+  line-height: 1.4;
 }
 
 .item-meta {
@@ -372,62 +364,23 @@ select {
   padding: 14px;
 }
 
-.answer-card strong {
+.answer-card strong,
+.sentence-card strong {
   font-size: 1.03rem;
 }
 
-.date-large {
+.badge {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-height: 58px;
-  padding: 10px 14px;
+  min-height: 44px;
+  padding: 8px 12px;
   background: var(--accent-soft);
   border: 1px solid #b8cbed;
   border-radius: 8px;
   color: var(--accent-strong);
-  font-size: 1.35rem;
+  font-size: 1rem;
   font-weight: 800;
-}
-
-.display-layout {
-  display: grid;
-  grid-template-columns: minmax(260px, 0.9fr) minmax(280px, 1.1fr);
-  gap: 16px;
-}
-
-.display-stand {
-  display: grid;
-  gap: 10px;
-  padding: 14px;
-  background: #ffffff;
-  border: 1px solid var(--line);
-  border-radius: 8px;
-  box-shadow: var(--shadow);
-}
-
-.display-row {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 8px;
-}
-
-.display-slot {
-  display: grid;
-  place-items: center;
-  min-height: 82px;
-  padding: 8px;
-  background: var(--panel-soft);
-  border: 2px dashed #c9d3ec;
-  color: var(--muted);
-  font-weight: 800;
-  text-align: center;
-}
-
-.display-slot.filled {
-  border-style: solid;
-  background: var(--accent-soft);
-  color: var(--success);
 }
 
 .dialog-card {
@@ -453,6 +406,22 @@ select {
 .role-label {
   margin: 0;
   color: var(--muted);
+  font-weight: 800;
+}
+
+.sentence-layout {
+  display: grid;
+  gap: 16px;
+}
+
+.sentence-card {
+  min-height: 120px;
+  padding: 16px;
+}
+
+.sentence-text {
+  font-size: 1.2rem;
+  color: var(--ink);
   font-weight: 800;
 }
 
@@ -499,7 +468,6 @@ select {
 .coach-grid p {
   margin: 0;
   color: var(--muted);
-  line-height: 1.4;
 }
 
 button:focus-visible,
@@ -517,8 +485,7 @@ input:focus-visible {
 
   .topbar,
   .status-band,
-  .quiz-layout,
-  .display-layout {
+  .quiz-layout {
     grid-template-columns: 1fr;
   }
 

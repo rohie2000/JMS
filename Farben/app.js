@@ -25,160 +25,60 @@ const colors = [
   { name: "Beige", hex: "#e6ccb2", family: "Braun", level: "shades" }
 ];
 
+const optionPresets = {
+  Rot: ["Rot", "Orange", "Gelb", "Grün"],
+  Orange: ["Orange", "Gelb", "Rot", "Braun"],
+  Gelb: ["Gelb", "Orange", "Grün", "Weiß"],
+  Blau: ["Blau", "Grün", "Grau", "Schwarz"],
+  Lila: ["Lila", "Rot", "Blau", "Rosa"],
+  Schwarz: ["Schwarz", "Grau", "Weiß", "Braun"],
+  Weiß: ["Weiß", "Grau", "Gelb", "Schwarz"],
+  Grün: ["Grün", "Gelb", "Braun", "Orange"]
+};
+
+function createObjectPrompt({ name, article, answer, category, image }) {
+  return {
+    name,
+    article,
+    answer,
+    category,
+    speak: `Welche Farbe hat ${article} ${name}?`,
+    image,
+    options: optionPresets[answer] ?? [answer, "Rot", "Blau", "Gelb"]
+  };
+}
+
 const objectPrompts = [
-  {
-    name: "Kochplatte",
-    article: "die",
-    answer: "Schwarz",
-    options: ["Schwarz", "Grau", "Rot", "Weiß"],
-    speak: "Welche Farbe hat die Kochplatte?",
-    kind: "object",
-    svg: "stove"
-  },
-  {
-    name: "Feuerlöscher",
-    article: "der",
-    answer: "Rot",
-    options: ["Rot", "Orange", "Grau", "Blau"],
-    speak: "Welche Farbe hat der Feuerlöscher?",
-    kind: "object",
-    svg: "extinguisher"
-  },
-  {
-    name: "Fußgängerschild",
-    article: "das",
-    answer: "Blau",
-    options: ["Blau", "Grün", "Grau", "Rot"],
-    speak: "Welche Farbe hat das Fußgängerschild?",
-    kind: "object",
-    svg: "pedestrian"
-  },
-  {
-    name: "Tafel",
-    article: "die",
-    answer: "Grün",
-    options: ["Grün", "Schwarz", "Blau", "Braun"],
-    speak: "Welche Farbe hat die Tafel?",
-    kind: "object",
-    svg: "board"
-  },
-  {
-    name: "Zebrastreifen",
-    article: "der",
-    answer: "Weiß",
-    options: ["Weiß", "Grau", "Gelb", "Rot"],
-    speak: "Welche Farbe hat der Zebrastreifen?",
-    kind: "object",
-    svg: "crossing"
-  },
-  {
-    name: "Elefant",
-    article: "der",
-    answer: "Grau",
-    options: ["Grau", "Braun", "Schwarz", "Blau"],
-    speak: "Welche Farbe hat der Elefant?",
-    kind: "animal",
-    svg: "elephant"
-  },
-  {
-    name: "Katze",
-    article: "die",
-    answer: "Braun",
-    options: ["Braun", "Grau", "Schwarz", "Weiß"],
-    speak: "Welche Farbe hat die Katze?",
-    kind: "animal",
-    svg: "cat"
-  },
-  {
-    name: "Hund",
-    article: "der",
-    answer: "Braun",
-    options: ["Braun", "Schwarz", "Grau", "Weiß"],
-    speak: "Welche Farbe hat der Hund?",
-    kind: "animal",
-    svg: "dog"
-  },
-  {
-    name: "Zebra",
-    article: "das",
-    answer: "Schwarz",
-    options: ["Schwarz", "Weiß", "Grau", "Braun"],
-    speak: "Welche Farbe hat das Zebra?",
-    kind: "animal",
-    svg: "zebra"
-  },
-  {
-    name: "Frosch",
-    article: "der",
-    answer: "Grün",
-    options: ["Grün", "Gelb", "Braun", "Blau"],
-    speak: "Welche Farbe hat der Frosch?",
-    kind: "animal",
-    svg: "frog"
-  },
-  {
-    name: "Biene",
-    article: "die",
-    answer: "Gelb",
-    options: ["Gelb", "Schwarz", "Orange", "Braun"],
-    speak: "Welche Farbe hat die Biene?",
-    kind: "animal",
-    svg: "bee"
-  },
-  {
-    name: "Jeans",
-    article: "die",
-    answer: "Blau",
-    options: ["Blau", "Grau", "Schwarz", "Braun"],
-    speak: "Welche Farbe hat die Jeans?",
-    kind: "object",
-    svg: "jeans"
-  },
-  {
-    name: "Brötchen",
-    article: "das",
-    answer: "Braun",
-    options: ["Braun", "Beige", "Gelb", "Weiß"],
-    speak: "Welche Farbe hat das Brötchen?",
-    kind: "object",
-    svg: "bread"
-  },
-  {
-    name: "Banane",
-    article: "die",
-    answer: "Gelb",
-    options: ["Gelb", "Grün", "Orange", "Braun"],
-    speak: "Welche Farbe hat die Banane?",
-    kind: "object",
-    svg: "banana"
-  },
-  {
-    name: "Orange",
-    article: "die",
-    answer: "Orange",
-    options: ["Orange", "Gelb", "Rot", "Grün"],
-    speak: "Welche Farbe hat die Orange?",
-    kind: "object",
-    svg: "orangefruit"
-  },
-  {
-    name: "Avocado",
-    article: "die",
-    answer: "Grün",
-    options: ["Grün", "Braun", "Gelb", "Schwarz"],
-    speak: "Welche Farbe hat die Avocado?",
-    kind: "object",
-    svg: "avocado"
-  },
-  {
-    name: "Tomate",
-    article: "die",
-    answer: "Rot",
-    options: ["Rot", "Orange", "Grün", "Gelb"],
-    speak: "Welche Farbe hat die Tomate?",
-    kind: "object",
-    svg: "tomato"
-  }
+  createObjectPrompt({ name: "Apfel", article: "der", answer: "Rot", category: "Lebensmittel", image: "apple" }),
+  createObjectPrompt({ name: "Tomate", article: "die", answer: "Rot", category: "Lebensmittel", image: "tomato" }),
+  createObjectPrompt({ name: "Erdbeere", article: "die", answer: "Rot", category: "Lebensmittel", image: "strawberry" }),
+  createObjectPrompt({ name: "Marienkäfer", article: "der", answer: "Rot", category: "Tier", image: "ladybug" }),
+  createObjectPrompt({ name: "Feuerwehrauto", article: "das", answer: "Rot", category: "Fahrzeug", image: "firetruck" }),
+  createObjectPrompt({ name: "Feuerlöscher", article: "der", answer: "Rot", category: "Alltag", image: "extinguisher" }),
+  createObjectPrompt({ name: "Orange", article: "die", answer: "Orange", category: "Lebensmittel", image: "orangefruit" }),
+  createObjectPrompt({ name: "Karotte", article: "die", answer: "Orange", category: "Lebensmittel", image: "carrot" }),
+  createObjectPrompt({ name: "Kürbis", article: "der", answer: "Orange", category: "Lebensmittel", image: "pumpkin" }),
+  createObjectPrompt({ name: "Orang-Utan", article: "der", answer: "Orange", category: "Tier", image: "orangutan" }),
+  createObjectPrompt({ name: "Banane", article: "die", answer: "Gelb", category: "Lebensmittel", image: "banana" }),
+  createObjectPrompt({ name: "Zitrone", article: "die", answer: "Gelb", category: "Lebensmittel", image: "lemon" }),
+  createObjectPrompt({ name: "Küken", article: "das", answer: "Gelb", category: "Tier", image: "chick" }),
+  createObjectPrompt({ name: "Blaubeere", article: "die", answer: "Blau", category: "Lebensmittel", image: "blueberry" }),
+  createObjectPrompt({ name: "Fußgängerschild", article: "das", answer: "Blau", category: "Verkehr", image: "pedestrian" }),
+  createObjectPrompt({ name: "Jeans", article: "die", answer: "Blau", category: "Kleidung", image: "jeans" }),
+  createObjectPrompt({ name: "Aubergine", article: "die", answer: "Lila", category: "Lebensmittel", image: "eggplant" }),
+  createObjectPrompt({ name: "Lavendel", article: "der", answer: "Lila", category: "Pflanze", image: "lavender" }),
+  createObjectPrompt({ name: "Pflaume", article: "die", answer: "Lila", category: "Lebensmittel", image: "plum" }),
+  createObjectPrompt({ name: "Rabe", article: "der", answer: "Schwarz", category: "Tier", image: "raven" }),
+  createObjectPrompt({ name: "Reifen", article: "der", answer: "Schwarz", category: "Fahrzeug", image: "tire" }),
+  createObjectPrompt({ name: "Kochplatte", article: "die", answer: "Schwarz", category: "Küche", image: "stove" }),
+  createObjectPrompt({ name: "Ei", article: "das", answer: "Weiß", category: "Lebensmittel", image: "egg" }),
+  createObjectPrompt({ name: "Schaf", article: "das", answer: "Weiß", category: "Tier", image: "sheep" }),
+  createObjectPrompt({ name: "Milch", article: "die", answer: "Weiß", category: "Getränk", image: "milk" }),
+  createObjectPrompt({ name: "Gurke", article: "die", answer: "Grün", category: "Lebensmittel", image: "cucumber" }),
+  createObjectPrompt({ name: "Brokkoli", article: "der", answer: "Grün", category: "Lebensmittel", image: "broccoli" }),
+  createObjectPrompt({ name: "Frosch", article: "der", answer: "Grün", category: "Tier", image: "frog" }),
+  createObjectPrompt({ name: "Blatt", article: "das", answer: "Grün", category: "Pflanze", image: "leaf" }),
+  createObjectPrompt({ name: "Kiwi", article: "die", answer: "Grün", category: "Lebensmittel", image: "kiwi" })
 ];
 
 const levelGroups = {
@@ -351,7 +251,7 @@ function colorByName(name) {
 }
 
 function promptImageSource(entry, revealed = false) {
-  return `bilder/${entry.svg}${revealed ? "" : "-grau"}.png`;
+  return `bilder/${entry.image}${revealed ? "" : "-grau"}.png`;
 }
 
 function createPromptCard(entry, revealed = false) {
@@ -362,7 +262,7 @@ function createPromptCard(entry, revealed = false) {
       <img class="prompt-image" src="${promptImageSource(entry, revealed)}" alt="${entry.name}">
     </div>
     <div class="prompt-copy">
-      <p class="item-meta">${entry.kind === "animal" ? "Tier" : "Alltag"}</p>
+      <p class="item-meta">${entry.category}</p>
       <h3>${entry.name}</h3>
       <p class="small-note">${revealed ? `Jetzt siehst du ${entry.article} ${entry.name.toLowerCase()} in ${entry.answer}.` : `Das Bild ist zuerst grau. Welche Farbe hat ${entry.article} ${entry.name.toLowerCase()}?`}</p>
     </div>
@@ -509,7 +409,7 @@ function drawObjectColor() {
   const availableNames = new Set(visibleColors.map((color) => color.name));
   const candidates = objectPrompts.filter((entry) => availableNames.has(entry.answer));
   const entry = !state.objectStarted
-    ? candidates.find((candidate) => candidate.svg === "banana") || pickRandom(candidates)
+    ? candidates.find((candidate) => candidate.image === "banana") || pickRandom(candidates)
     : pickRandom(candidates);
   state.objectStarted = true;
   const options = shuffle(entry.options)
