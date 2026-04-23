@@ -3,9 +3,9 @@ const tools = [
     name: "Hammer",
     category: "Schlagen und Formen",
     image: "bilder/Hammer_02.jpg",
-    use: "Mit dem Hammer schlage ich Nagel in Holz.",
+    use: "Mit dem Hammer schlage ich Nägel ins Holz.",
     property: "Der Hammer hat einen harten Kopf und einen festen Stiel.",
-    safety: "Ich achte auf meine Finger und trage eine Schutzbrille.",
+    safety: "Ich achte auf meine Finger.",
     level: "starter"
   },
   {
@@ -14,16 +14,16 @@ const tools = [
     image: "bilder/Gummihammer_02.jpg",
     use: "Mit dem Gummihammer schlage ich vorsichtig, ohne das Material stark zu beschadigen.",
     property: "Der Kopf ist weich aus Gummi.",
-    safety: "Ich schlage ruhig und halte das Werkstuck sicher fest.",
+    safety: "Ich schlage ruhig und halte das Werkstück sicher fest.",
     level: "core"
   },
   {
     name: "Beisszange",
     category: "Greifen und Schneiden",
     image: "bilder/Beisszange_02.jpg",
-    use: "Mit der Beisszange ziehe ich Nagel aus Holz.",
+    use: "Mit der Beisszange ziehe ich Nägel aus Holz.",
     property: "Die Beisszange hat starke Backen zum Ziehen und Schneiden.",
-    safety: "Ich halte Abstand zu meinen Fingern und trage eine Schutzbrille.",
+    safety: "Ich halte Abstand zu meinen Fingern.",
     level: "starter"
   },
   {
@@ -50,14 +50,14 @@ const tools = [
     image: "bilder/Seitenschneider_02.jpg",
     use: "Mit dem Seitenschneider schneide ich Draht oder Kabelbinder.",
     property: "Der Seitenschneider hat scharfe Schneiden an der Seite.",
-    safety: "Ich schneide weg von meinem Korper und trage eine Schutzbrille.",
+    safety: "Ich schneide weg von meinem Körper.",
     level: "starter"
   },
   {
     name: "Abisolierzange",
     category: "Greifen und Schneiden",
     image: "bilder/Abisolierzange_02.jpg",
-    use: "Mit der Abisolierzange entferne ich die Hulle von einem Kabel.",
+    use: "Mit der Abisolierzange entferne ich die Hülle von einem Kabel.",
     property: "Die Abisolierzange schneidet nur die Isolierung ab.",
     safety: "Ich arbeite nur an stromlosen Kabeln.",
     level: "all"
@@ -93,7 +93,7 @@ const tools = [
     name: "Gabelschlussel",
     category: "Schrauben und Drehen",
     image: "bilder/Gabelschluessel_01.jpg",
-    use: "Mit dem Gabelschlussel lose oder feste ich Muttern und Schrauben.",
+    use: "Mit dem Gabelschlüssel löse oder feste ich Muttern und Schrauben.",
     property: "Der Schlussel ist an beiden Seiten offen.",
     safety: "Ich setze den Schlussel gerade an, damit er nicht abrutscht.",
     level: "core"
@@ -102,9 +102,9 @@ const tools = [
     name: "Ringschlussel",
     category: "Schrauben und Drehen",
     image: "bilder/Ringschluessel_03.jpg",
-    use: "Mit dem Ringschlussel drehe ich Muttern besonders sicher.",
+    use: "Mit dem Ringschlüssel drehe ich Muttern besonders sicher.",
     property: "Der Ringschlussel umschliesst die Mutter fast ganz.",
-    safety: "Ich ziehe ruhig und rucke nicht plotzlich.",
+    safety: "Ich ziehe ruhig und rutsche nicht plötzlich.",
     level: "all"
   },
   {
@@ -120,7 +120,7 @@ const tools = [
     name: "Gliedermassstab",
     category: "Anzeichnen und Messen",
     image: "bilder/Gliedermassstab_02.jpg",
-    use: "Mit dem Gliedermassstab messe ich Langen.",
+    use: "Mit dem Gliedermassstab messe ich Längen.",
     property: "Der Gliedermassstab lasst sich aufklappen und wieder zusammenfalten.",
     safety: "Ich klappe ihn langsam auf, damit ich mich nicht einklemme.",
     level: "starter"
@@ -138,16 +138,16 @@ const tools = [
     name: "Wasserwage",
     category: "Anzeichnen und Messen",
     image: "bilder/Wasserwage_01.jpg",
-    use: "Mit der Wasserwage prufe ich, ob etwas gerade ist.",
+    use: "Mit der Wasserwaage prüfe ich, ob etwas gerade ist.",
     property: "In der Wasserwage ist eine kleine Libelle mit Luftblase.",
-    safety: "Ich lege die Wasserwage ruhig auf das Werkstuck.",
+    safety: "Ich lege die Wasserwage ruhig auf das Werkstück.",
     level: "core"
   },
   {
     name: "Holzwinkel",
     category: "Anzeichnen und Messen",
     image: "bilder/Holzwinkel_01.jpg",
-    use: "Mit dem Holzwinkel prufe oder zeichne ich einen rechten Winkel.",
+    use: "Mit dem Holzwinkel prüfe oder zeichne ich einen rechten Winkel.",
     property: "Der Holzwinkel hilft bei genauen Ecken mit 90 Grad.",
     safety: "Ich arbeite sauber an der Kante und drucke nicht zu stark.",
     level: "core"
@@ -165,7 +165,7 @@ const tools = [
     name: "Puksage",
     category: "Sagen und Trennen",
     image: "bilder/Puksaege_01.jpg",
-    use: "Mit der Puksage sage ich dunnes Metall oder Kunststoff.",
+    use: "Mit der Puk-Säge sage ich dünnes Metall oder Kunststoff.",
     property: "Die Puksage hat ein feines, eingespanntes Sageblatt.",
     safety: "Ich arbeite mit wenig Druck und trage eine Schutzbrille.",
     level: "all"
@@ -174,7 +174,7 @@ const tools = [
     name: "Cutter",
     category: "Sagen und Trennen",
     image: "bilder/Cutter_01.jpg",
-    use: "Mit dem Cutter schneide ich Papier, Karton oder dunnes Material.",
+    use: "Mit dem Cutter schneide ich Papier, Karton oder dünnes Material.",
     property: "Der Cutter hat eine sehr scharfe Klinge.",
     safety: "Ich schneide immer weg vom Korper und schiebe die Klinge danach ein.",
     level: "starter"
@@ -183,7 +183,7 @@ const tools = [
     name: "Schraubzwinge",
     category: "Spannen und Halten",
     image: "bilder/Schraubzwinge_01.jpg",
-    use: "Mit der Schraubzwinge halte ich Werkstucke fest.",
+    use: "Mit der Schraubzwinge halte ich Werkstücke fest.",
     property: "Die Schraubzwinge spannt Material mit Druck zusammen.",
     safety: "Meine Finger bleiben aus dem Spannbereich heraus.",
     level: "starter"
@@ -192,7 +192,7 @@ const tools = [
     name: "Bohrschraubstock",
     category: "Spannen und Halten",
     image: "bilder/Bohrschraubstock_01.jpg",
-    use: "Mit dem Bohrschraubstock spanne ich ein Werkstuck fur das Bohren ein.",
+    use: "Mit dem Bohrschraubstock spanne ich ein Werkstück für das Bohren ein.",
     property: "Der Bohrschraubstock halt das Werkstuck sehr fest.",
     safety: "Ich bohre nie in ein loses Werkstuck.",
     level: "all"
@@ -261,7 +261,7 @@ const safetyTasks = [
   {
     title: "Hammerarbeit",
     prompt: "Du hammerst einen Nagel ein. Was ist wichtig?",
-    answer: "Ich achte auf meine Finger und trage eine Schutzbrille.",
+    answer: "Ich achte auf meine Finger.",
     wrong: [
       "Ich halte den Nagel ganz lange oben fest und schaue nicht auf meine Hand.",
       "Eine Schutzbrille brauche ich nie."
@@ -311,8 +311,8 @@ const safetyTasks = [
 ];
 
 const sentenceTasks = [
-  { tool: "Hammer", text: "Mit dem Hammer hammere ich Nagel in Holz." },
-  { tool: "Beisszange", text: "Mit der Beisszange ziehe ich Nagel aus einem Holz." },
+  { tool: "Hammer", text: "Mit dem Hammer hämmer ich Nägel ins Holz." },
+  { tool: "Beisszange", text: "Mit der Beisszange ziehe ich Nägel aus Holz." },
   { tool: "Flachzange", text: "Mit der Flachzange halte und biege ich Draht." },
   { tool: "Seitenschneider", text: "Mit dem Seitenschneider schneide ich Draht." },
   { tool: "Schlitzschraubendreher", text: "Mit dem Schlitzschraubendreher drehe ich eine Schraube mit geradem Schlitz." },
