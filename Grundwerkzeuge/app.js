@@ -12,17 +12,17 @@ const tools = [
     name: "Gummihammer",
     category: "Schlagen und Formen",
     image: "bilder/Gummihammer_02.jpg",
-    use: "Mit dem Gummihammer schlage ich vorsichtig, ohne das Material stark zu beschadigen.",
+    use: "Mit dem Gummihammer schlage ich vorsichtig, ohne das Material stark zu beschädigen.",
     property: "Der Kopf ist weich aus Gummi.",
     safety: "Ich schlage ruhig und halte das Werkstück sicher fest.",
     level: "core"
   },
   {
-    name: "Beisszange",
+    name: "Beißzange",
     category: "Greifen und Schneiden",
     image: "bilder/Beisszange_02.jpg",
-    use: "Mit der Beisszange ziehe ich Nägel aus Holz.",
-    property: "Die Beisszange hat starke Backen zum Ziehen und Schneiden.",
+    use: "Mit der Beißzange ziehe ich Nägel aus Holz.",
+    property: "Die Beißzange hat starke Backen zum Ziehen und Schneiden.",
     safety: "Ich halte Abstand zu meinen Fingern.",
     level: "starter"
   },
@@ -40,8 +40,8 @@ const tools = [
     category: "Greifen und Schneiden",
     image: "bilder/Rohrzange_02.jpg",
     use: "Mit der Rohrzange halte und drehe ich Rohr oder runde Teile.",
-    property: "Die Rohrzange kann weit geoffnet werden und greift fest.",
-    safety: "Ich prufe den festen Sitz, bevor ich Kraft gebe.",
+    property: "Die Rohrzange kann weit geöffnet werden und greift fest.",
+    safety: "Ich prüfe den festen Sitz, bevor ich Kraft gebe.",
     level: "core"
   },
   {
@@ -68,42 +68,42 @@ const tools = [
     image: "bilder/Schlitzschraubendreher_01.jpg",
     use: "Mit dem Schlitzschraubendreher drehe ich Schrauben mit einem geraden Schlitz.",
     property: "Die Spitze ist gerade und flach.",
-    safety: "Ich nutze immer die passende Spitze fur die Schraube.",
+    safety: "Ich nutze immer die passende Spitze für die Schraube.",
     level: "starter"
   },
   {
     name: "Kreuzschlitz-Schraubendreher",
     category: "Schrauben und Drehen",
     image: "bilder/Kreuzschlitz-Schraubendreher_01.jpg",
-    use: "Mit dem Kreuzschlitz-Schraubendreher drehe ich Schrauben mit Kreuz.",
+    use: "Mit dem Kreuzschlitz-Schraubendreher drehe ich Schrauben mit Kreuzschlitz.",
     property: "Die Spitze hat die Form von einem Kreuz.",
-    safety: "Ich drucke gerade auf die Schraube, damit ich nicht abrutsche.",
+    safety: "Ich drücke gerade auf die Schraube, damit ich nicht abrutsche.",
     level: "starter"
   },
   {
     name: "Bits",
     category: "Schrauben und Drehen",
     image: "bilder/Bits_02.jpg",
-    use: "Bits sind Wechselspitzen fur Schrauben mit verschiedenen Formen.",
-    property: "Bits sind klein und konnen schnell gewechselt werden.",
-    safety: "Ich wahle den passenden Bit, bevor ich starte.",
+    use: "Bits sind Wechselspitzen für Schrauben mit verschiedenen Formen.",
+    property: "Bits sind klein und können schnell gewechselt werden.",
+    safety: "Ich wähle den passenden Bit, bevor ich starte.",
     level: "all"
   },
   {
-    name: "Gabelschlussel",
+    name: "Gabelschlüssel",
     category: "Schrauben und Drehen",
     image: "bilder/Gabelschluessel_01.jpg",
     use: "Mit dem Gabelschlüssel löse oder feste ich Muttern und Schrauben.",
-    property: "Der Schlussel ist an beiden Seiten offen.",
-    safety: "Ich setze den Schlussel gerade an, damit er nicht abrutscht.",
+    property: "Der Schlüssel ist an beiden Seiten offen.",
+    safety: "Ich setze den Schlüssel gerade an, damit er nicht abrutscht.",
     level: "core"
   },
   {
-    name: "Ringschlussel",
+    name: "Ringschlüssel",
     category: "Schrauben und Drehen",
     image: "bilder/Ringschluessel_03.jpg",
     use: "Mit dem Ringschlüssel drehe ich Muttern besonders sicher.",
-    property: "Der Ringschlussel umschliesst die Mutter fast ganz.",
+    property: "Der Ringschlüssel umschließt die Mutter fast ganz.",
     safety: "Ich ziehe ruhig und rutsche nicht plötzlich.",
     level: "all"
   },
@@ -117,11 +117,11 @@ const tools = [
     level: "starter"
   },
   {
-    name: "Gliedermassstab",
+    name: "Gliedermaßstab",
     category: "Anzeichnen und Messen",
     image: "bilder/Gliedermassstab_02.jpg",
-    use: "Mit dem Gliedermassstab messe ich Längen.",
-    property: "Der Gliedermassstab lasst sich aufklappen und wieder zusammenfalten.",
+    use: "Mit dem Gliedermaßstab messe ich Längen.",
+    property: "Der Gliedermaßstab lässt sich aufklappen und wieder zusammenfalten.",
     safety: "Ich klappe ihn langsam auf, damit ich mich nicht einklemme.",
     level: "starter"
   },
@@ -149,34 +149,34 @@ const tools = [
     image: "bilder/Holzwinkel_01.jpg",
     use: "Mit dem Holzwinkel prüfe oder zeichne ich einen rechten Winkel.",
     property: "Der Holzwinkel hilft bei genauen Ecken mit 90 Grad.",
-    safety: "Ich arbeite sauber an der Kante und drucke nicht zu stark.",
+    safety: "Ich arbeite sauber an der Kante und drücke nicht zu stark.",
     level: "core"
   },
   {
-    name: "Fuchsschwanzsage",
-    category: "Sagen und Trennen",
+    name: "Fuchsschwanzsäge",
+    category: "Sägen und Trennen",
     image: "bilder/Fuchsschwanzsaege_02.jpg",
-    use: "Mit der Fuchsschwanzsage sage ich Holz von Hand.",
-    property: "Die Sage hat ein langes Blatt mit groben Zahnen.",
-    safety: "Ich halte das Holz fest und sage langsam vom Korper weg.",
+    use: "Mit der Fuchsschwanzsäge säge ich Holz von Hand.",
+    property: "Die Säge hat ein langes Blatt mit groben Zähnen.",
+    safety: "Ich halte das Holz fest und säge langsam vom Körper weg.",
     level: "starter"
   },
   {
-    name: "Puksage",
-    category: "Sagen und Trennen",
+    name: "Puksäge",
+    category: "Sägen und Trennen",
     image: "bilder/Puksaege_01.jpg",
-    use: "Mit der Puk-Säge sage ich dünnes Metall oder Kunststoff.",
-    property: "Die Puksage hat ein feines, eingespanntes Sageblatt.",
+    use: "Mit der Puksäge säge ich dünnes Metall oder Kunststoff.",
+    property: "Die Puksäge hat ein feines, eingespanntes Sägeblatt.",
     safety: "Ich arbeite mit wenig Druck und trage eine Schutzbrille.",
     level: "all"
   },
   {
     name: "Cutter",
-    category: "Sagen und Trennen",
+    category: "Sägen und Trennen",
     image: "bilder/Cutter_01.jpg",
     use: "Mit dem Cutter schneide ich Papier, Karton oder dünnes Material.",
     property: "Der Cutter hat eine sehr scharfe Klinge.",
-    safety: "Ich schneide immer weg vom Korper und schiebe die Klinge danach ein.",
+    safety: "Ich schneide immer weg vom Körper und schiebe die Klinge danach ein.",
     level: "starter"
   },
   {
@@ -193,17 +193,17 @@ const tools = [
     category: "Spannen und Halten",
     image: "bilder/Bohrschraubstock_01.jpg",
     use: "Mit dem Bohrschraubstock spanne ich ein Werkstück für das Bohren ein.",
-    property: "Der Bohrschraubstock halt das Werkstuck sehr fest.",
-    safety: "Ich bohre nie in ein loses Werkstuck.",
+    property: "Der Bohrschraubstock hält das Werkstück sehr fest.",
+    safety: "Ich bohre nie in ein loses Werkstück.",
     level: "all"
   },
   {
     name: "Bohrerkassette",
     category: "Bohren",
     image: "bilder/Bohrerkassette_01.jpg",
-    use: "In der Bohrerkassette liegen Bohrer in verschiedenen Grossen.",
+    use: "In der Bohrerkassette liegen Bohrer in verschiedenen Größen.",
     property: "Die Bohrer haben unterschiedliche Durchmesser.",
-    safety: "Ich nehme nur den passenden Bohrer und raume ihn wieder sicher zuruck.",
+    safety: "Ich nehme nur den passenden Bohrer und räume ihn wieder sicher zurück.",
     level: "all"
   },
   {
@@ -211,7 +211,7 @@ const tools = [
     category: "Bearbeiten und Schleifen",
     image: "bilder/Raspel_flach_01.jpg",
     use: "Mit der Raspel bearbeite ich Holz und trage Material ab.",
-    property: "Die Raspel ist rau und hat viele kleine Zahne.",
+    property: "Die Raspel ist rau und hat viele kleine Zähne.",
     safety: "Ich halte meine zweite Hand weg von der Arbeitsrichtung.",
     level: "core"
   },
@@ -219,9 +219,9 @@ const tools = [
     name: "Schleifklotz",
     category: "Bearbeiten und Schleifen",
     image: "bilder/Schleifklotz_01.jpg",
-    use: "Mit dem Schleifklotz glatte ich Flachen und Kanten.",
-    property: "Der Schleifklotz macht Holz oder andere Flachen glatter.",
-    safety: "Ich arbeite ruhig und schutze mich vor Staub.",
+    use: "Mit dem Schleifklotz glätte ich Flächen und Kanten.",
+    property: "Der Schleifklotz macht Holz oder andere Flächen glatter.",
+    safety: "Ich arbeite ruhig und schütze mich vor Staub.",
     level: "core"
   },
   {
@@ -240,7 +240,7 @@ const categories = [
   "Schrauben und Drehen",
   "Greifen und Schneiden",
   "Schlagen und Formen",
-  "Sagen und Trennen",
+  "Sägen und Trennen",
   "Spannen und Halten",
   "Bohren",
   "Bearbeiten und Schleifen",
@@ -251,12 +251,12 @@ const safetyTasks = [
   {
     title: "Cutter benutzen",
     prompt: "Du schneidest Karton mit dem Cutter. Was ist sicher?",
-    answer: "Ich schneide weg von meinem Korper und schiebe die Klinge danach ein.",
+    answer: "Ich schneide weg von meinem Körper und schiebe die Klinge danach ein.",
     wrong: [
       "Ich schneide zu mir hin, dann sehe ich es besser.",
       "Ich lasse die Klinge nach der Arbeit einfach offen."
     ],
-    note: "Scharfe Klingen werden immer sicher gefuhrt und danach geschlossen."
+    note: "Scharfe Klingen werden immer sicher geführt und danach geschlossen."
   },
   {
     title: "Hammerarbeit",
@@ -266,17 +266,17 @@ const safetyTasks = [
       "Ich halte den Nagel ganz lange oben fest und schaue nicht auf meine Hand.",
       "Eine Schutzbrille brauche ich nie."
     ],
-    note: "Beim Schlagen konnen Splitter fliegen. Abstand und Schutz sind wichtig."
+    note: "Beim Schlagen können Splitter fliegen. Abstand und Schutz sind wichtig."
   },
   {
-    title: "Sagen",
-    prompt: "Du sagst ein Brett. Was ist sicher?",
-    answer: "Ich halte das Holz fest und sage langsam vom Korper weg.",
+    title: "Sägen",
+    prompt: "Du sägst ein Brett. Was ist sicher?",
+    answer: "Ich halte das Holz fest und säge langsam vom Körper weg.",
     wrong: [
-      "Ich sage sehr schnell, auch wenn das Brett wackelt.",
-      "Ich halte meine Hand direkt vor das Sageblatt."
+      "Ich säge sehr schnell, auch wenn das Brett wackelt.",
+      "Ich halte meine Hand direkt vor das Sägeblatt."
     ],
-    note: "Nur ein festes Werkstuck kann sicher bearbeitet werden."
+    note: "Nur ein festes Werkstück kann sicher bearbeitet werden."
   },
   {
     title: "Kabel bearbeiten",
@@ -289,19 +289,19 @@ const safetyTasks = [
     note: "Elektrische Arbeiten nur sicher und nur ohne Strom."
   },
   {
-    title: "Werkstuck spannen",
+    title: "Werkstück spannen",
     prompt: "Du willst bohren. Was machst du zuerst?",
-    answer: "Ich spanne das Werkstuck sicher ein.",
+    answer: "Ich spanne das Werkstück sicher ein.",
     wrong: [
-      "Ich halte das Werkstuck mit der Hand fest.",
-      "Ich lege das Werkstuck lose auf den Tisch."
+      "Ich halte das Werkstück mit der Hand fest.",
+      "Ich lege das Werkstück lose auf den Tisch."
     ],
-    note: "Lose Werkstucke durfen nicht gebohrt werden."
+    note: "Lose Werkstücke dürfen nicht gebohrt werden."
   },
   {
-    title: "Bohrer auswahlen",
+    title: "Bohrer auswählen",
     prompt: "Du nimmst einen Bohrer aus der Kassette. Was ist wichtig?",
-    answer: "Ich nehme den passenden Bohrer in der richtigen Grosse.",
+    answer: "Ich nehme den passenden Bohrer in der richtigen Größe.",
     wrong: [
       "Ich nehme irgendeinen Bohrer. Das ist egal.",
       "Ich werfe die Bohrer nach der Arbeit lose in die Kiste."
@@ -312,22 +312,22 @@ const safetyTasks = [
 
 const sentenceTasks = [
   { tool: "Hammer", text: "Mit dem Hammer hämmer ich Nägel ins Holz." },
-  { tool: "Beisszange", text: "Mit der Beisszange ziehe ich Nägel aus Holz." },
+  { tool: "Beißzange", text: "Mit der Beißzange ziehe ich Nägel aus Holz." },
   { tool: "Flachzange", text: "Mit der Flachzange halte und biege ich Draht." },
   { tool: "Seitenschneider", text: "Mit dem Seitenschneider schneide ich Draht." },
   { tool: "Schlitzschraubendreher", text: "Mit dem Schlitzschraubendreher drehe ich eine Schraube mit geradem Schlitz." },
-  { tool: "Kreuzschlitz-Schraubendreher", text: "Mit dem Kreuzschlitz-Schraubendreher drehe ich eine Schraube mit Kreuz." },
-  { tool: "Gliedermassstab", text: "Mit dem Gliedermassstab messe ich eine Lange." },
-  { tool: "Wasserwage", text: "Mit der Wasserwage prufe ich, ob etwas gerade ist." },
-  { tool: "Schraubzwinge", text: "Mit der Schraubzwinge halte ich ein Werkstuck fest." },
+  { tool: "Kreuzschlitz-Schraubendreher", text: "Mit dem Kreuzschlitz-Schraubendreher drehe ich eine Schraube mit Kreuzschlitz." },
+  { tool: "Gliedermaßstab", text: "Mit dem Gliedermaßstab messe ich eine Länge." },
+  { tool: "Wasserwage", text: "Mit der Wasserwage prüfe ich, ob etwas gerade ist." },
+  { tool: "Schraubzwinge", text: "Mit der Schraubzwinge halte ich ein Werkstück fest." },
   { tool: "Holzleim", text: "Mit Holzleim klebe ich zwei Holzteile zusammen." }
 ];
 
 const dialogs = [
   {
     mode: "Werkzeug holen",
-    customer: "Bitte gib mir das Werkzeug zum Messen. Ich weiss den Namen nicht.",
-    answer: "Gerne. Zum Messen nehmen wir oft den Gliedermassstab oder ein Lineal. Ich zeige dir beides.",
+    customer: "Bitte gib mir das Werkzeug zum Messen. Ich weiß den Namen nicht.",
+    answer: "Gerne. Zum Messen nehmen wir oft den Gliedermaßstab oder ein Lineal. Ich zeige dir beides.",
     wrong: [
       "Nimm einfach irgendetwas von der Werkbank.",
       "Das musst du alleine wissen."
@@ -337,7 +337,7 @@ const dialogs = [
   {
     mode: "Sicherheit",
     customer: "Ich will gleich mit dem Cutter schneiden. Muss ich etwas beachten?",
-    answer: "Ja. Schneide immer weg vom Korper und schiebe die Klinge danach wieder ein.",
+    answer: "Ja. Schneide immer weg vom Körper und schiebe die Klinge danach wieder ein.",
     wrong: [
       "Nein. Beim Cutter ist Sicherheit nicht so wichtig.",
       "Du kannst die Klinge einfach offen liegen lassen."
@@ -345,14 +345,14 @@ const dialogs = [
     note: "Bei scharfen Werkzeugen immer ruhig und sicher arbeiten."
   },
   {
-    mode: "Werkstuck spannen",
+    mode: "Werkstück spannen",
     customer: "Kann ich das Brett beim Bohren einfach mit der Hand festhalten?",
-    answer: "Nein. Das Werkstuck muss sicher gespannt werden, zum Beispiel mit einer Schraubzwinge oder in einem Schraubstock.",
+    answer: "Nein. Das Werkstück muss sicher gespannt werden, zum Beispiel mit einer Schraubzwinge oder in einem Schraubstock.",
     wrong: [
       "Ja, das geht immer und ist schneller.",
       "Lege das Brett locker hin. Das reicht."
     ],
-    note: "Sicheres Spannen schutzt die Hand und macht die Arbeit genauer."
+    note: "Sicheres Spannen schützt die Hand und macht die Arbeit genauer."
   },
   {
     mode: "Werkzeug finden",
@@ -362,12 +362,12 @@ const dialogs = [
       "Nimm lieber Holzleim.",
       "Das ist egal. Jede Zange kann alles."
     ],
-    note: "Das passende Werkzeug wird uber den Einsatz gefunden."
+    note: "Das passende Werkzeug wird über den Einsatz gefunden."
   },
   {
-    mode: "Eigenschaft erklaren",
+    mode: "Eigenschaft erklären",
     customer: "Warum nehme ich fur manche Schlage einen Gummihammer?",
-    answer: "Der Gummihammer schlagt weicher. So wird das Material weniger beschadigt.",
+    answer: "Der Gummihammer schlägt weicher. So wird das Material weniger beschädigt.",
     wrong: [
       "Weil ein Gummihammer immer schwerer ist als ein normaler Hammer.",
       "Weil man damit auch schrauben kann."
@@ -378,13 +378,13 @@ const dialogs = [
 
 const starterNames = new Set([
   "Hammer",
-  "Beisszange",
+  "Beißzange",
   "Seitenschneider",
   "Schlitzschraubendreher",
   "Kreuzschlitz-Schraubendreher",
   "Bleistift",
-  "Gliedermassstab",
-  "Fuchsschwanzsage",
+  "Gliedermaßstab",
+  "Fuchsschwanzsäge",
   "Cutter",
   "Schraubzwinge",
   "Holzleim"
@@ -421,7 +421,7 @@ function visibleTools() {
 
 function speak(text) {
   if (!("speechSynthesis" in window)) {
-    setFeedback("Dieser Browser unterstutzt hier keine Sprachausgabe.", "try");
+    setFeedback("Dieser Browser unterstützt hier keine Sprachausgabe.", "try");
     return;
   }
   window.speechSynthesis.cancel();
@@ -531,7 +531,7 @@ function drawLearn() {
   state.current = null;
   panel.innerHTML = "";
   panel.className = "activity-panel card-grid";
-  taskText.textContent = "Tippe eine Karte an, um Werkzeug, Fachbegriff, Einsatz und Sicherheit zu horen.";
+  taskText.textContent = "Tippe eine Karte an, um Werkzeug, Fachbegriff, Einsatz und Sicherheit zu hören.";
   setFeedback("Lernmodus: Jede Karte spricht in einfacher Sprache.");
 
   visibleTools().forEach((tool) => {
@@ -549,10 +549,10 @@ function drawLearn() {
 function drawCategory() {
   const pool = visibleTools();
   const target = pickRandom(pool);
-  state.current = { speak: `Zu welchem Fachbereich gehort ${target.name}?` };
+  state.current = { speak: `Zu welchem Fachbereich gehört ${target.name}?` };
   panel.innerHTML = "";
   panel.className = "activity-panel quiz-layout";
-  taskText.textContent = `Zu welchem Fachbegriff-Bereich gehort: ${target.name}?`;
+  taskText.textContent = `Zu welchem Fachbegriff-Bereich gehört: ${target.name}?`;
   setFeedback("Wahle den passenden Bereich.");
 
   const taskCard = document.createElement("article");
@@ -564,18 +564,18 @@ function drawCategory() {
   answers.className = "answer-grid";
   const options = shuffle([target.category, ...shuffle(categories.filter((category) => category !== target.category)).slice(0, 3)]);
   options.forEach((category) => {
-    answers.append(answerButton(category, "Bereich auswahlen", (button) => {
+    answers.append(answerButton(category, "Bereich auswählen", (button) => {
       const isCorrect = category === target.category;
       button.classList.add(isCorrect ? "correct" : "wrong");
       if (isCorrect) {
         addPoint();
-        setFeedback(`Richtig. ${target.name} gehort zu ${target.category}.`, "good");
-        speak(`Richtig. ${target.name} gehort zu ${target.category}.`);
+        setFeedback(`Richtig. ${target.name} gehört zu ${target.category}.`, "good");
+        speak(`Richtig. ${target.name} gehört zu ${target.category}.`);
         window.setTimeout(nextTask, 1200);
         return;
       }
-      setFeedback(`Fast. ${target.name} gehort zu ${target.category}.`, "try");
-      speak(`Fast. ${target.name} gehort zu ${target.category}.`);
+      setFeedback(`Fast. ${target.name} gehört zu ${target.category}.`, "try");
+      speak(`Fast. ${target.name} gehört zu ${target.category}.`);
     }));
   });
 
@@ -588,10 +588,10 @@ function drawCategory() {
 function drawUse() {
   const pool = visibleTools();
   const target = pickRandom(pool);
-  state.current = { speak: `Wofur benutzt man ${target.name}?` };
+  state.current = { speak: `Wofür benutzt man ${target.name}?` };
   panel.innerHTML = "";
   panel.className = "activity-panel quiz-layout";
-  taskText.textContent = `Wofur benutzt du ${target.name}?`;
+  taskText.textContent = `Wofür benutzt du ${target.name}?`;
   setFeedback("Wahle den passenden Einsatz.");
 
   const taskCard = document.createElement("article");
@@ -603,7 +603,7 @@ function drawUse() {
   answers.className = "answer-grid";
   const options = shuffle([target.use, ...shuffle(pool.filter((tool) => tool.name !== target.name).map((tool) => tool.use)).slice(0, 3)]);
   options.forEach((entry) => {
-    answers.append(answerButton(entry, "Einsatz auswahlen", (button) => {
+    answers.append(answerButton(entry, "Einsatz auswählen", (button) => {
       const isCorrect = entry === target.use;
       button.classList.add(isCorrect ? "correct" : "wrong");
       if (isCorrect) {
@@ -639,7 +639,7 @@ function drawSafety() {
   const answers = document.createElement("div");
   answers.className = "answer-grid";
   shuffle([task.answer, ...task.wrong]).forEach((answer) => {
-    answers.append(answerButton(answer, "Sicherheit auswahlen", (button) => {
+    answers.append(answerButton(answer, "Sicherheit auswählen", (button) => {
       const isCorrect = answer === task.answer;
       button.classList.add(isCorrect ? "correct" : "wrong");
       if (isCorrect) {
@@ -678,7 +678,7 @@ function drawProperty() {
   answers.className = "answer-grid";
   const options = shuffle([target.property, ...shuffle(pool.filter((tool) => tool.name !== target.name).map((tool) => tool.property)).slice(0, 3)]);
   options.forEach((entry) => {
-    answers.append(answerButton(entry, "Eigenschaft auswahlen", (button) => {
+    answers.append(answerButton(entry, "Eigenschaft auswählen", (button) => {
       const isCorrect = entry === target.property;
       button.classList.add(isCorrect ? "correct" : "wrong");
       if (isCorrect) {
@@ -713,12 +713,12 @@ function drawSentence() {
   const sentenceCard = document.createElement("article");
   sentenceCard.className = "sentence-card";
   sentenceCard.append(createPhoto(correctTool));
-  sentenceCard.insertAdjacentHTML("beforeend", `<strong>Ubungssatz</strong><p class="sentence-text">${task.text}</p><p class="small-note">Nach dem Losen kann der Satz laut wiederholt werden.</p>`);
+  sentenceCard.insertAdjacentHTML("beforeend", `<strong>Übungssatz</strong><p class="sentence-text">${task.text}</p><p class="small-note">Nach dem Lösen kann der Satz laut wiederholt werden.</p>`);
 
   const answers = document.createElement("div");
   answers.className = "answer-grid";
   options.forEach((name) => {
-    answers.append(answerButton(name, "Werkzeug auswahlen", (button) => {
+    answers.append(answerButton(name, "Werkzeug auswählen", (button) => {
       const isCorrect = name === task.tool;
       button.classList.add(isCorrect ? "correct" : "wrong");
       if (isCorrect) {
@@ -745,7 +745,7 @@ function drawDialog() {
   state.current = { speak: `Dialog. ${dialog.customer}` };
   panel.innerHTML = "";
   panel.className = "activity-panel quiz-layout";
-  taskText.textContent = `Dialog uben: ${dialog.mode}`;
+  taskText.textContent = `Dialog üben: ${dialog.mode}`;
   setFeedback("Wahle eine freundliche und sichere Antwort.");
 
   const dialogCard = document.createElement("article");
@@ -755,7 +755,7 @@ function drawDialog() {
   const answers = document.createElement("div");
   answers.className = "answer-grid";
   options.forEach((answer) => {
-    answers.append(answerButton(answer, "Antwort auswahlen", (button) => {
+    answers.append(answerButton(answer, "Antwort auswählen", (button) => {
       const isCorrect = answer === dialog.answer;
       button.classList.add(isCorrect ? "correct" : "wrong");
       if (isCorrect) {
@@ -812,7 +812,7 @@ function updateMode(mode) {
 
 function currentSpeech() {
   if (!state.current) {
-    return "Bereit fur das Training mit Grundwerkzeugen.";
+    return "Bereit für das Training mit Grundwerkzeugen.";
   }
   return state.current.speak || taskText.textContent;
 }
