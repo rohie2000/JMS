@@ -12,9 +12,37 @@
       <div>
         <p class="eyebrow">Jakob-Muth-Schule Nürnberg</p>
         <h1 id="app-title">Ballonspiel</h1>
-        <p class="intro">Schön, dass du hier bist.</p>
+        <p class="intro">Fange die Ballone in den Grundfarben. Jeder Treffer macht Feuerwerk, sagt die Farbe und bringt einen Punkt.</p>
+      </div>
+
+      <div class="voice-panel" aria-label="Sprachausgabe">
+        <button class="secondary-button" id="voice-test" type="button">Stimme testen</button>
+        <label class="voice-toggle">
+          <input id="auto-speak" type="checkbox" checked>
+          <span>Automatisch sprechen</span>
+        </label>
       </div>
     </section>
+
+    <section class="status-band" aria-live="polite">
+      <div>
+        <p class="status-label">Aktuelle Aufgabe</p>
+        <p class="task-text" id="task-text">Fange Ballone in Rot, Blau, Gelb und Grün.</p>
+      </div>
+      <div class="score-box">
+        <span id="score">0</span>
+        <small>Punkte</small>
+      </div>
+    </section>
+
+    <section class="controls" aria-label="Spiel steuern">
+      <button class="primary-button" id="restart" type="button">Neu starten</button>
+      <button class="secondary-button" id="repeat" type="button">Nochmal hören</button>
+    </section>
+
+    <section class="activity-panel balloon-mode" id="activity-panel" aria-label="Ballonspielbereich"></section>
+    <section class="feedback" id="feedback" aria-live="assertive">Bereit.</section>
+    <p class="site-credit"><a href="../index.html">Zur Startseite</a></p>
   </main>
 
   <script src="./app.js"></script>
