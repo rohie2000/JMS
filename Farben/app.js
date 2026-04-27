@@ -304,7 +304,7 @@ function colorByName(name) {
 }
 
 function promptImageSource(entry, revealed = false) {
-  return `bilder/${entry.image}${revealed ? "" : "-grau"}.png`;
+  return `bilder/${entry.image}.png`;
 }
 
 function createPromptCard(entry, revealed = false) {
@@ -312,7 +312,7 @@ function createPromptCard(entry, revealed = false) {
   card.className = `prompt-card ${revealed ? "revealed" : ""}`.trim();
   card.innerHTML = `
     <div class="prompt-visual">
-      <img class="prompt-image" src="${promptImageSource(entry, revealed)}" alt="${entry.name}">
+      <img class="prompt-image ${revealed ? "is-revealed" : "is-muted"}" src="${promptImageSource(entry, revealed)}" alt="${entry.name}">
     </div>
     <div class="prompt-copy">
       <p class="item-meta">${entry.category}</p>

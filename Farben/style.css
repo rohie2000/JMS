@@ -581,6 +581,17 @@ select {
   max-width: 320px;
   height: auto;
   object-fit: contain;
+  transition: filter 0.22s ease, opacity 0.22s ease;
+}
+
+.prompt-image.is-muted {
+  filter: grayscale(1) contrast(0.9) brightness(1.02);
+  opacity: 0.92;
+}
+
+.prompt-image.is-revealed {
+  filter: none;
+  opacity: 1;
 }
 
 .prompt-copy h3 {
