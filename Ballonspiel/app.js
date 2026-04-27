@@ -355,14 +355,17 @@ function startRound() {
 }
 
 repeatButton.addEventListener("click", () => {
+  unlockSpeech();
   speak("Fange die Ballone in Rot, Blau, Gelb und Grün.");
 });
 
 restartButton.addEventListener("click", () => {
+  unlockSpeech();
   startRound();
 });
 
 voiceTestButton.addEventListener("click", () => {
+  unlockSpeech();
   speak("Hallo. Wir spielen jetzt das Ballonspiel mit Grundfarben.");
 });
 
@@ -371,6 +374,7 @@ if ("speechSynthesis" in window) {
   window.speechSynthesis.addEventListener("voiceschanged", loadVoices);
   window.addEventListener("pointerdown", unlockSpeech, { once: true });
   window.addEventListener("keydown", unlockSpeech, { once: true });
+  window.addEventListener("touchstart", unlockSpeech, { once: true });
 }
 
 startRound();

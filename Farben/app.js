@@ -521,9 +521,16 @@ tabs.forEach((tab) => {
   tab.addEventListener("click", () => updateMode(tab.dataset.mode));
 });
 
-repeatButton.addEventListener("click", repeatCurrent);
-nextButton.addEventListener("click", nextTask);
+repeatButton.addEventListener("click", () => {
+  unlockSpeech();
+  repeatCurrent();
+});
+nextButton.addEventListener("click", () => {
+  unlockSpeech();
+  nextTask();
+});
 voiceTestButton.addEventListener("click", () => {
+  unlockSpeech();
   speak("Hallo. Ich helfe dir beim Üben der Farben.");
 });
 levelFilter.addEventListener("change", (event) => {
@@ -536,6 +543,7 @@ if ("speechSynthesis" in window) {
   window.speechSynthesis.addEventListener("voiceschanged", loadVoices);
   window.addEventListener("pointerdown", unlockSpeech, { once: true });
   window.addEventListener("keydown", unlockSpeech, { once: true });
+  window.addEventListener("touchstart", unlockSpeech, { once: true });
 }
 
 drawLearn();

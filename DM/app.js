@@ -79,6 +79,9 @@ const state = {
   current: null,
   score: 0,
   voices: [],
+  speechUnlocked: false,
+  pendingSpeech: null,
+  speechToken: 0,
   selectedExpress: new Set(),
   selectedDisplay: new Set()
 };
@@ -104,13 +107,47 @@ function visibleProducts() {
   return products;
 }
 
-function speak(text) {
+function flushPendingSpeech() {
+  if (!state.pendingSpeech) {
+    return;
+  }
+  const pending = state.pendingSpeech;
+  state.pendingSpeech = null;
+  window.setTimeout(() => speak(pending.text, true, pending.options), 80);
+}
+
+function unlockSpeech() {
+  if (!("speechSynthesis" in window)) {
+    return;
+  }
+  state.speechUnlocked = true;
+  window.speechSynthesis.resume();
+  flushPendingSpeech();
+}
+
+function queueSpeech(text, options = {}) {
+  state.pendingSpeech = { text, options };
+}
+
+function speak(text, bypassLock = false, options = {}) {
+  const { interrupt = true, onend = null } = options;
+
   if (!("speechSynthesis" in window)) {
     setFeedback("Dieser Browser unterstützt hier keine Sprachausgabe.", "try");
     return;
   }
-  window.speechSynthesis.cancel();
+
+  if (!state.speechUnlocked && !bypassLock) {
+    queueSpeech(text, options);
+    return;
+  }
+
+  if (interrupt) {
+    window.speechSynthesis.cancel();
+  }
+  window.speechSynthesis.resume();
   const utterance = new SpeechSynthesisUtterance(text);
+  const token = ++state.speechToken;
   utterance.lang = "de-DE";
   utterance.rate = 0.88;
   utterance.pitch = 1;
@@ -118,6 +155,20 @@ function speak(text) {
   if (germanVoice) {
     utterance.voice = germanVoice;
   }
+  utterance.onend = () => {
+    if (token !== state.speechToken) {
+      return;
+    }
+    if (typeof onend === "function") {
+      onend();
+    }
+  };
+  utterance.onerror = () => {
+    setFeedback("Die Sprachausgabe konnte gerade nicht gestartet werden.", "try");
+    if (typeof onend === "function") {
+      onend();
+    }
+  };
   window.speechSynthesis.speak(utterance);
 }
 
@@ -557,8 +608,13 @@ tabs.forEach((tab) => {
 });
 
 repeatButton.addEventListener("click", repeatCurrent);
-nextButton.addEventListener("click", nextTask);
+repeatButton.addEventListener("click", unlockSpeech);
+nextButton.addEventListener("click", () => {
+  unlockSpeech();
+  nextTask();
+});
 voiceTestButton.addEventListener("click", () => {
+  unlockSpeech();
   speak("Hallo. Ich helfe dir beim Training im Drogeriemarkt.");
 });
 levelFilter.addEventListener("change", (event) => {
@@ -569,6 +625,9 @@ levelFilter.addEventListener("change", (event) => {
 if ("speechSynthesis" in window) {
   loadVoices();
   window.speechSynthesis.addEventListener("voiceschanged", loadVoices);
+  window.addEventListener("pointerdown", unlockSpeech, { once: true });
+  window.addEventListener("keydown", unlockSpeech, { once: true });
+  window.addEventListener("touchstart", unlockSpeech, { once: true });
 }
 
 drawLearn();
