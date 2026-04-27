@@ -11,6 +11,7 @@ const state = {
   score: 0,
   voices: [],
   speechUnlocked: false,
+  speechPrimed: false,
   pendingSpeech: null,
   intervalId: null,
   balloonId: 0,
@@ -52,7 +53,43 @@ function flushPendingSpeech() {
   }
   const pending = state.pendingSpeech;
   state.pendingSpeech = null;
-  window.setTimeout(() => speak(pending.text, true, pending.options), 80);
+  speak(pending.text, true, pending.options);
+}
+
+function pickGermanVoice() {
+  return state.voices.find((voice) => voice.lang?.toLowerCase() === "de-de")
+    || state.voices.find((voice) => voice.lang?.toLowerCase().startsWith("de"))
+    || state.voices[0]
+    || null;
+}
+
+function loadVoices() {
+  if (!("speechSynthesis" in window)) {
+    return;
+  }
+  const voices = window.speechSynthesis.getVoices();
+  if (Array.isArray(voices) && voices.length > 0) {
+    state.voices = voices;
+  }
+}
+
+function primeSpeech() {
+  if (!("speechSynthesis" in window) || state.speechPrimed) {
+    return;
+  }
+  state.speechPrimed = true;
+  try {
+    const utterance = new SpeechSynthesisUtterance(" ");
+    utterance.lang = "de-DE";
+    utterance.volume = 0;
+    const germanVoice = pickGermanVoice();
+    if (germanVoice) {
+      utterance.voice = germanVoice;
+    }
+    window.speechSynthesis.speak(utterance);
+  } catch (error) {
+    state.speechPrimed = false;
+  }
 }
 
 function unlockSpeech() {
@@ -60,15 +97,23 @@ function unlockSpeech() {
     return;
   }
   state.speechUnlocked = true;
+  loadVoices();
   window.speechSynthesis.resume();
+  if (!state.speechPrimed && !state.pendingSpeech) {
+    primeSpeech();
+  }
   flushPendingSpeech();
 }
 
 function speak(text, bypassLock = false, options = {}) {
-  const { interrupt = true, onend = null } = options;
+  const { interrupt = true, onend = null, retry = true } = options;
 
   if (!("speechSynthesis" in window)) {
     setFeedback("Dieser Browser unterstützt hier keine Sprachausgabe.", "try");
+    return;
+  }
+
+  if (!text) {
     return;
   }
 
@@ -77,16 +122,20 @@ function speak(text, bypassLock = false, options = {}) {
     return;
   }
 
+  loadVoices();
+
   if (interrupt) {
     window.speechSynthesis.cancel();
   }
 
+  window.speechSynthesis.resume();
   const utterance = new SpeechSynthesisUtterance(text);
   const token = ++state.speechToken;
   utterance.lang = "de-DE";
   utterance.rate = 0.92;
   utterance.pitch = 1;
-  const germanVoice = state.voices.find((voice) => voice.lang.toLowerCase().startsWith("de"));
+  utterance.volume = 1;
+  const germanVoice = pickGermanVoice();
   if (germanVoice) {
     utterance.voice = germanVoice;
   }
@@ -98,18 +147,18 @@ function speak(text, bypassLock = false, options = {}) {
       onend();
     }
   };
-  utterance.onerror = () => {
+  utterance.onerror = (event) => {
+    if (retry && ["interrupted", "canceled", "audio-busy"].includes(event?.error)) {
+      window.setTimeout(() => {
+        speak(text, true, { ...options, retry: false });
+      }, 120);
+      return;
+    }
     if (typeof onend === "function") {
       onend();
     }
   };
   window.speechSynthesis.speak(utterance);
-}
-
-function loadVoices() {
-  if ("speechSynthesis" in window) {
-    state.voices = window.speechSynthesis.getVoices();
-  }
 }
 
 function playMouseBeep() {
@@ -372,7 +421,15 @@ voiceTestButton.addEventListener("click", () => {
 if ("speechSynthesis" in window) {
   loadVoices();
   window.speechSynthesis.addEventListener("voiceschanged", loadVoices);
+  window.addEventListener("pageshow", loadVoices);
+  document.addEventListener("visibilitychange", () => {
+    if (!document.hidden) {
+      loadVoices();
+      window.speechSynthesis.resume();
+    }
+  });
   window.addEventListener("pointerdown", unlockSpeech, { once: true });
+  window.addEventListener("click", unlockSpeech, { once: true });
   window.addEventListener("keydown", unlockSpeech, { once: true });
   window.addEventListener("touchstart", unlockSpeech, { once: true });
 }

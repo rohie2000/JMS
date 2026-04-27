@@ -397,6 +397,7 @@ const state = {
   score: 0,
   voices: [],
   speechUnlocked: false,
+  speechPrimed: false,
   pendingSpeech: null,
   speechToken: 0
 };
@@ -428,7 +429,41 @@ function flushPendingSpeech() {
   }
   const pending = state.pendingSpeech;
   state.pendingSpeech = null;
-  window.setTimeout(() => speak(pending.text, true, pending.options), 80);
+  speak(pending.text, true, pending.options);
+}
+
+function queueSpeech(text, options = {}) {
+  state.pendingSpeech = { text, options };
+}
+
+function pickGermanVoice() {
+  return state.voices.find((voice) => voice.lang?.toLowerCase() === "de-de")
+    || state.voices.find((voice) => voice.lang?.toLowerCase().startsWith("de"))
+    || state.voices[0]
+    || null;
+}
+
+function loadVoices() {
+  state.voices = window.speechSynthesis ? window.speechSynthesis.getVoices() : [];
+}
+
+function primeSpeech() {
+  if (!("speechSynthesis" in window) || state.speechPrimed) {
+    return;
+  }
+  state.speechPrimed = true;
+  try {
+    const utterance = new SpeechSynthesisUtterance(" ");
+    utterance.lang = "de-DE";
+    utterance.volume = 0;
+    const germanVoice = pickGermanVoice();
+    if (germanVoice) {
+      utterance.voice = germanVoice;
+    }
+    window.speechSynthesis.speak(utterance);
+  } catch (error) {
+    state.speechPrimed = false;
+  }
 }
 
 function unlockSpeech() {
@@ -436,19 +471,23 @@ function unlockSpeech() {
     return;
   }
   state.speechUnlocked = true;
+  loadVoices();
   window.speechSynthesis.resume();
+  if (!state.speechPrimed && !state.pendingSpeech) {
+    primeSpeech();
+  }
   flushPendingSpeech();
 }
 
-function queueSpeech(text, options = {}) {
-  state.pendingSpeech = { text, options };
-}
-
 function speak(text, bypassLock = false, options = {}) {
-  const { interrupt = true, onend = null } = options;
+  const { interrupt = true, onend = null, retry = true } = options;
 
   if (!("speechSynthesis" in window)) {
     setFeedback("Dieser Browser unterstützt hier keine Sprachausgabe.", "try");
+    return;
+  }
+
+  if (!text) {
     return;
   }
 
@@ -456,6 +495,8 @@ function speak(text, bypassLock = false, options = {}) {
     queueSpeech(text, options);
     return;
   }
+
+  loadVoices();
 
   if (interrupt) {
     window.speechSynthesis.cancel();
@@ -466,7 +507,8 @@ function speak(text, bypassLock = false, options = {}) {
   utterance.lang = "de-DE";
   utterance.rate = 0.88;
   utterance.pitch = 1;
-  const germanVoice = state.voices.find((voice) => voice.lang.toLowerCase().startsWith("de"));
+  utterance.volume = 1;
+  const germanVoice = pickGermanVoice();
   if (germanVoice) {
     utterance.voice = germanVoice;
   }
@@ -478,7 +520,13 @@ function speak(text, bypassLock = false, options = {}) {
       onend();
     }
   };
-  utterance.onerror = () => {
+  utterance.onerror = (event) => {
+    if (retry && ["interrupted", "canceled", "audio-busy"].includes(event?.error)) {
+      window.setTimeout(() => {
+        speak(text, true, { ...options, retry: false });
+      }, 120);
+      return;
+    }
     setFeedback("Die Sprachausgabe konnte gerade nicht gestartet werden.", "try");
     if (typeof onend === "function") {
       onend();
@@ -868,10 +916,6 @@ function currentSpeech() {
   return state.current.speak || taskText.textContent;
 }
 
-function loadVoices() {
-  state.voices = window.speechSynthesis ? window.speechSynthesis.getVoices() : [];
-}
-
 tabs.forEach((tab) => {
   tab.addEventListener("click", () => updateMode(tab.dataset.mode));
 });
@@ -899,7 +943,15 @@ voiceTestButton.addEventListener("click", () => {
 if ("speechSynthesis" in window) {
   loadVoices();
   window.speechSynthesis.onvoiceschanged = loadVoices;
+  window.addEventListener("pageshow", loadVoices);
+  document.addEventListener("visibilitychange", () => {
+    if (!document.hidden) {
+      loadVoices();
+      window.speechSynthesis.resume();
+    }
+  });
   window.addEventListener("pointerdown", unlockSpeech, { once: true });
+  window.addEventListener("click", unlockSpeech, { once: true });
   window.addEventListener("keydown", unlockSpeech, { once: true });
   window.addEventListener("touchstart", unlockSpeech, { once: true });
 }
