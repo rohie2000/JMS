@@ -139,7 +139,7 @@ function clearRound() {
     window.clearInterval(state.intervalId);
     state.intervalId = null;
   }
-  panel.querySelectorAll(".balloon, .firework-burst, .mouse-finale").forEach((node) => node.remove());
+  panel.querySelectorAll(".balloon, .firework-burst, .balloon-pop-effect, .balloon-fragment, .mouse-finale").forEach((node) => node.remove());
   state.finished = false;
 }
 
@@ -171,6 +171,58 @@ function createFireworkBurst(left, top, color) {
 
   panel.querySelector("#balloon-board").append(burst);
   window.setTimeout(() => burst.remove(), 700);
+}
+
+function createBalloonFragments(left, top, color, width, height) {
+  const board = document.querySelector("#balloon-board");
+  if (!board) {
+    return;
+  }
+
+  const effect = document.createElement("div");
+  effect.className = "balloon-pop-effect";
+  effect.style.left = `${left}px`;
+  effect.style.top = `${top}px`;
+  effect.style.setProperty("--fragment-color", color.hex);
+
+  const ring = document.createElement("span");
+  ring.className = "balloon-pop-ring";
+  effect.append(ring);
+
+  const fragmentShapes = [
+    "polygon(0 10%, 100% 0, 86% 100%, 18% 84%)",
+    "polygon(10% 0, 100% 24%, 78% 100%, 0 74%)",
+    "polygon(0 0, 82% 6%, 100% 76%, 26% 100%)",
+    "polygon(24% 0, 100% 18%, 82% 94%, 0 100%, 8% 32%)",
+    "polygon(8% 12%, 72% 0, 100% 44%, 58% 100%, 0 82%)"
+  ];
+
+  for (let index = 0; index < 24; index += 1) {
+    const angle = ((Math.PI * 2) / 24) * index + (Math.random() - 0.5) * 0.38;
+    const distance = 95 + Math.random() * 155;
+    const fragment = document.createElement("span");
+    const fragmentWidth = 20 + Math.random() * 30;
+    const fragmentHeight = 24 + Math.random() * 38;
+    const startX = (Math.random() - 0.5) * width * 0.42;
+    const startY = (Math.random() - 0.5) * height * 0.42;
+    const driftX = Math.cos(angle) * distance;
+    const driftY = Math.sin(angle) * distance + 42 + Math.random() * 36;
+
+    fragment.className = "balloon-fragment";
+    fragment.style.left = `${startX}px`;
+    fragment.style.top = `${startY}px`;
+    fragment.style.width = `${fragmentWidth}px`;
+    fragment.style.height = `${fragmentHeight}px`;
+    fragment.style.setProperty("--fragment-x", `${driftX}px`);
+    fragment.style.setProperty("--fragment-y", `${driftY}px`);
+    fragment.style.setProperty("--fragment-rotate", `${(Math.random() > 0.5 ? 1 : -1) * (260 + Math.random() * 520)}deg`);
+    fragment.style.setProperty("--fragment-delay", `${Math.random() * 90}ms`);
+    fragment.style.clipPath = fragmentShapes[index % fragmentShapes.length];
+    effect.append(fragment);
+  }
+
+  board.append(effect);
+  window.setTimeout(() => effect.remove(), 1500);
 }
 
 function finishRound() {
@@ -252,19 +304,18 @@ function spawnBalloon() {
     if (balloon.classList.contains("is-popped") || state.finished) {
       return;
     }
-    balloon.classList.add("is-popped");
     const balloonRect = balloon.getBoundingClientRect();
     const boardRect = board.getBoundingClientRect();
-    createFireworkBurst(
-      balloonRect.left - boardRect.left + balloonRect.width / 2,
-      balloonRect.top - boardRect.top + balloonRect.height / 2,
-      color
-    );
+    const burstLeft = balloonRect.left - boardRect.left + balloonRect.width / 2;
+    const burstTop = balloonRect.top - boardRect.top + balloonRect.height / 2;
+    createFireworkBurst(burstLeft, burstTop, color);
+    createBalloonFragments(burstLeft, burstTop, color, balloonRect.width, balloonRect.height);
+    balloon.classList.add("is-popped");
     updateCaughtText(color.name);
     addPoint();
     setFeedback(`Treffer. Das ist ${color.name}.`, "good");
     speak(color.name, false);
-    window.setTimeout(() => balloon.remove(), 160);
+    window.setTimeout(() => balloon.remove(), 360);
   });
 
   balloon.addEventListener("animationend", () => {
@@ -286,7 +337,7 @@ function startRound() {
         <div>
           <p class="status-label">Ballonspiel</p>
           <h2>Fange die Grundfarben</h2>
-          <p class="small-note">Tippe einen Ballon an. Er platzt mit Feuerwerk, die Farbe wird gesagt und du sammelst Punkte bis 10.</p>
+          <p class="small-note">Tippe einen Ballon an. Er platzt mit Feuerwerk, Ballonteile fliegen weg, die Farbe wird gesagt und du sammelst Punkte bis 10.</p>
         </div>
         <div class="balloon-status">
           <strong id="balloon-progress">0 / ${targetScore} Punkte</strong>
