@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Fotorealistisches Snake</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <main class="game-shell">
+      <section class="hud" aria-label="Spielstand">
+        <div>
+          <span class="label">Punkte</span>
+          <strong id="score">0</strong>
+        </div>
+        <div>
+          <span class="label">Obst</span>
+          <strong id="fruitName">Apfel</strong>
+        </div>
+        <button id="restartButton" type="button">Neu starten</button>
+      </section>
+
+      <section class="board-wrap" aria-label="Snake Spielfeld">
+        <canvas id="game" width="720" height="720"></canvas>
+        <div id="message" class="message" hidden></div>
+      </section>
+
+      <section class="touch-pad" aria-label="Touch Steuerung">
+        <button type="button" data-direction="up" aria-label="Nach oben">↑</button>
+        <button type="button" data-direction="left" aria-label="Nach links">←</button>
+        <button type="button" data-direction="down" aria-label="Nach unten">↓</button>
+        <button type="button" data-direction="right" aria-label="Nach rechts">→</button>
+      </section>
+    </main>
+
+    <script src="game.js"></script>
+  </body>
+</html>
