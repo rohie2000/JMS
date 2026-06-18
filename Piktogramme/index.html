@@ -1,90 +1,72 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="de">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Piktogramme</title>
-    <link rel="stylesheet" href="./style.css">
-  </head>
-  <body>
-    <main class="app-shell">
-      <section class="topbar" aria-labelledby="app-title">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#17324d">
+  <title>Piktogramme lernen</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="app-shell">
+    <header class="hero">
+      <div>
+        <p class="kicker">Sehen · Hören · Verstehen</p>
+        <h1>Piktogramme</h1>
+        <p class="intro">Zeichen helfen dir. Wähle Zeichen aus. Dann übst du mit ihnen.</p>
+      </div>
+      <div class="voice-box" aria-label="Sprachausgabe">
+        <button class="light-button" id="voice-test" type="button">🔊 Stimme testen</button>
+        <label><input id="auto-speak" type="checkbox" checked> Automatisch vorlesen</label>
+      </div>
+    </header>
+
+    <section class="selection" aria-labelledby="selection-title">
+      <div class="selection-head">
         <div>
-          <!-- <p class="eyebrow">Jakob-Muth-Schule Nürnberg</p> -->
-          <h1 id="app-title">Piktogramme</h1>
-          <p class="intro">Schön, dass du hier bist.</p>
+          <p class="kicker dark">Deine Auswahl</p>
+          <h2 id="selection-title">Welche Zeichen willst du üben?</h2>
         </div>
+        <button class="outline-button" id="choose-signs" type="button">Zeichen auswählen</button>
+      </div>
+      <div class="category-chips" id="category-chips" aria-label="Zeichen-Gruppen"></div>
+      <p class="selection-info" id="selection-info" aria-live="polite"></p>
+      <div class="sign-picker" id="sign-picker" hidden></div>
+    </section>
 
-        <div class="voice-panel" aria-label="Sprachausgabe">
-          <button class="secondary-button" id="voice-test" type="button">Stimme testen</button>
-          <label class="voice-toggle">
-            <input id="auto-speak" type="checkbox" checked>
-            <span>Automatisch sprechen</span>
-          </label>
-        </div>
-      </section>
+    <nav class="mode-tabs" aria-label="Übung auswählen">
+      <button class="tab active" data-mode="discover" type="button"><span>👀</span> Entdecken</button>
+      <button class="tab" data-mode="name" type="button"><span>💬</span> Bedeutung</button>
+      <button class="tab" data-mode="group" type="button"><span>🧺</span> Sortieren</button>
+      <button class="tab" data-mode="memory" type="button"><span>🧠</span> Merk dir das</button>
+      <button class="tab" data-mode="mission" type="button"><span>🧭</span> Was hilft?</button>
+    </nav>
 
-      <nav class="mode-tabs" aria-label="Lernmodus auswählen">
-        <button class="tab active" type="button" data-mode="learn">Lernen</button>
-        <button class="tab" type="button" data-mode="category">Überbegriffe</button>
-        <button class="tab" type="button" data-mode="express">Express</button>
-        <button class="tab" type="button" data-mode="date">MHD</button>
-        <button class="tab" type="button" data-mode="display">Aufsteller</button>
-        <button class="tab" type="button" data-mode="dialog">Dialog</button>
-      </nav>
+    <section class="task-band">
+      <div>
+        <p class="task-label">Deine Aufgabe</p>
+        <p id="task-text">Tippe auf ein Zeichen. Du hörst die Bedeutung.</p>
+      </div>
+      <div class="score"><strong id="score">0</strong><span>Punkte</span></div>
+    </section>
 
-      <section class="status-band" aria-live="polite">
-        <div>
-          <p class="status-label">Aktuelle Aufgabe</p>
-          <p class="task-text" id="task-text">Tippe eine Karte an, um Aufgabe und Begriff zu hören.</p>
-        </div>
-        <div class="score-box">
-          <span id="score">0</span>
-          <small>Punkte</small>
-        </div>
-      </section>
+    <div class="controls">
+      <button class="primary-button" id="repeat" type="button">🔊 Nochmal hören</button>
+      <button class="outline-button" id="next" type="button">Neue Aufgabe →</button>
+    </div>
 
-      <section class="controls" aria-label="Training steuern">
-        <button class="primary-button" id="repeat" type="button">Nochmal hören</button>
-        <button class="secondary-button" id="next" type="button">Neue Aufgabe</button>
-        <select id="level-filter" aria-label="Auswahl">
-          <option value="starter">Start: wichtige Aufgaben</option>
-          <option value="core">Mehr Produkte</option>
-          <option value="all">Alles üben</option>
-        </select>
-      </section>
+    <section id="activity-panel" class="activity-panel" aria-label="Lernbereich"></section>
+    <section id="feedback" class="feedback" aria-live="assertive">Du kannst anfangen.</section>
 
-      <section class="activity-panel" id="activity-panel" aria-label="Lernbereich"></section>
+    <section class="help-strip">
+      <article><span>🔵</span><div><strong>Gebotszeichen</strong><p>Du sollst etwas tun.</p></div></article>
+      <article><span>🟢</span><div><strong>Rettungszeichen</strong><p>Hier findest du Hilfe.</p></div></article>
+      <article><span>🔴</span><div><strong>Brandschutzzeichen</strong><p>Hier ist etwas gegen Feuer.</p></div></article>
+      <article><span>🟡</span><div><strong>Warnzeichen</strong><p>Achtung! Hier ist Gefahr.</p></div></article>
+    </section>
 
-      <section class="feedback" id="feedback" aria-live="assertive">Bereit.</section>
-
-      <section class="coach-box" aria-labelledby="coach-title">
-        <div>
-          <p class="eyebrow">Trainer-Ideen</p>
-          <h2 id="coach-title">So kann geübt werden</h2>
-        </div>
-        <div class="coach-grid">
-          <article>
-            <h3>Erst zeigen, dann fragen</h3>
-            <p>Im Lernmodus hört die Gruppe Begriffe und kurze Arbeitsschritte. Danach passt das Quiz dazu.</p>
-          </article>
-          <article>
-            <h3>Dialoge laut sprechen</h3>
-            <p>Eine Person liest die Kundin, eine Person antwortet. Die App liest bei Bedarf vor.</p>
-          </article>
-          <article>
-            <h3>Regalrunde im Markt</h3>
-            <p>Nach dem Üben gehen die Praktikanten zum echten Regal und suchen dieselben Überbegriffe.</p>
-          </article>
-        </div>
-      </section>
-
-      <footer class="site-credit">
-        Entwickelt und Erstellt mit Schülern der Jakob‑Muth‑Schule Nürnberg - Rolfy Hientz ·
-        <a href="mailto:hientzr@jms.lhnbg.de">hientzr@jms.lhnbg.de</a>
-      </footer>
-    </main>
-
-    <script src="./app.js"></script>
-  </body>
+    <footer>Entwickelt und erstellt mit Schülerinnen und Schülern der Jakob‑Muth‑Schule Nürnberg · Rolfy Hientz · <a href="mailto:hientzr@jms.lhnbg.de">hientzr@jms.lhnbg.de</a></footer>
+  </main>
+  <script src="app.js"></script>
+</body>
 </html>
