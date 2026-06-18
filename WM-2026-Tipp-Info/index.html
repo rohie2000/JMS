@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Länderinfo: Türkei</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <main class="app">
+      <section class="hero" aria-labelledby="country-title">
+        <div class="hero__media">
+          <img
+            src="https://commons.wikimedia.org/wiki/Special:FilePath/Flag_of_Turkey.svg"
+            alt="Flagge der Türkei"
+            class="hero__flag"
+          >
+        </div>
+        <div class="hero__content">
+          <p class="eyebrow">Länder-Wissen</p>
+          <h1 id="country-title">Türkei</h1>
+          <p class="intro" id="speech-text">
+            Die Türkei liegt auf zwei Kontinenten: in Südosteuropa und in Westasien.
+            Die Hauptstadt ist Ankara. In der Türkei leben rund 86 Millionen Menschen.
+            Das Klima ist je nach Region unterschiedlich: an den Küsten oft mediterran,
+            im Landesinneren heiß im Sommer und kalt im Winter. Berühmte Speisen sind
+            Döner, Lahmacun, Köfte, Baklava und viele regionale Gerichte.
+          </p>
+          <div class="actions">
+            <button class="primary" id="speak-button" type="button">
+              <span aria-hidden="true">▶</span>
+              Vorlesen
+            </button>
+            <button class="secondary" id="stop-button" type="button">
+              <span aria-hidden="true">■</span>
+              Stop
+            </button>
+            <button class="anthem-button" id="anthem-button" type="button" aria-pressed="false">
+              <span aria-hidden="true">♪</span>
+              Nationalhymne
+            </button>
+          </div>
+          <audio
+            id="anthem-audio"
+            preload="metadata"
+            src="https://commons.wikimedia.org/wiki/Special:FilePath/Istikl%C3%A2l_Marsi_instrumetal.ogg"
+          ></audio>
+        </div>
+      </section>
+
+      <section class="facts" aria-label="Wichtige Fakten">
+        <article>
+          <span>Hauptstadt</span>
+          <strong>Ankara</strong>
+        </article>
+        <article>
+          <span>Einwohner</span>
+          <strong>ca. 86 Mio.</strong>
+        </article>
+        <article>
+          <span>Sprache</span>
+          <strong>Türkisch</strong>
+        </article>
+        <article>
+          <span>Währung</span>
+          <strong>Türkische Lira</strong>
+        </article>
+      </section>
+
+      <section class="map-section" aria-labelledby="map-title">
+        <div class="section-head">
+          <h2 id="map-title">Wo liegt die Türkei?</h2>
+          <p>
+            Die Türkei verbindet Südosteuropa mit Westasien. Auf der Karte ist
+            das Land farblich hervorgehoben.
+          </p>
+        </div>
+        <div
+          class="map-card"
+          aria-label="Karte der Türkei in ihrer Region mit beschrifteten Nachbarländern"
+        >
+          <img
+            src="https://commons.wikimedia.org/wiki/Special:FilePath/Turkey_in_its_region.svg"
+            alt="Karte von Europa, Westasien und Nordafrika mit hervorgehobener Türkei"
+          >
+          <span class="map-label map-label--europe">Europa</span>
+          <span class="map-label map-label--asia">Asien</span>
+          <span class="map-pin">Türkei</span>
+          <span class="country-marker country-marker--greece">
+            <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Flag_of_Greece.svg" alt="">
+            Griechenland
+          </span>
+          <span class="country-marker country-marker--bulgaria">
+            <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Flag_of_Bulgaria.svg" alt="">
+            Bulgarien
+          </span>
+          <span class="country-marker country-marker--georgia">
+            <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Flag_of_Georgia.svg" alt="">
+            Georgien
+          </span>
+          <span class="country-marker country-marker--armenia">
+            <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Flag_of_Armenia.svg" alt="">
+            Armenien
+          </span>
+          <span class="country-marker country-marker--azerbaijan">
+            <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Flag_of_Azerbaijan.svg" alt="">
+            Aserbaidschan
+          </span>
+          <span class="country-marker country-marker--iran">
+            <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Flag_of_Iran.svg" alt="">
+            Iran
+          </span>
+          <span class="country-marker country-marker--iraq">
+            <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Flag_of_Iraq.svg" alt="">
+            Irak
+          </span>
+          <span class="country-marker country-marker--syria">
+            <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Flag_of_Syria.svg" alt="">
+            Syrien
+          </span>
+          <span class="country-marker country-marker--cyprus">
+            <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Flag_of_Cyprus.svg" alt="">
+            Zypern
+          </span>
+        </div>
+      </section>
+
+      <section class="details" aria-label="Informationen zur Türkei">
+        <div class="info-panel">
+          <h2>Klima</h2>
+          <p>
+            An der Ägäis und am Mittelmeer sind die Sommer meist heiß und trocken,
+            die Winter mild und feuchter. Im Landesinneren gibt es stärkere
+            Temperaturunterschiede mit kalten Wintern und heißen Sommern.
+          </p>
+        </div>
+        <div class="info-panel">
+          <h2>Essen</h2>
+          <p>
+            Die türkische Küche ist vielfältig: Döner wird vom Drehspieß geschnitten,
+            Lahmacun ist ein dünner Teigfladen mit würziger Fleischmischung. Auch
+            Meze, Pide, Köfte, Börek und Baklava sind bekannt.
+          </p>
+        </div>
+        <div class="info-panel">
+          <h2>Besonderheiten</h2>
+          <p>
+            Istanbul verbindet Europa und Asien über den Bosporus. Das Land hat
+            lange Küsten, Gebirge, große Städte, historische Stätten und sehr
+            unterschiedliche Landschaften.
+          </p>
+        </div>
+      </section>
+
+      <section class="gallery" aria-labelledby="gallery-title">
+        <div class="section-head">
+          <h2 id="gallery-title">Echte Fotos</h2>
+          <p>Lebensmittel und Symbole sind mit Originalquellen verknüpft.</p>
+        </div>
+        <div class="photo-grid">
+          <article
+            class="photo-card"
+          >
+            <img
+              src="https://commons.wikimedia.org/wiki/Special:FilePath/D%C3%B6ner_Kebab_auf_Teller.jpg?width=900"
+              alt="Döner Kebab auf einem Teller"
+            >
+            <span>Döner Kebab</span>
+          </article>
+          <article
+            class="photo-card"
+          >
+            <img
+              src="https://commons.wikimedia.org/wiki/Special:FilePath/Lahmacun.jpg?width=900"
+              alt="Lahmacun auf einem Teller"
+            >
+            <span>Lahmacun</span>
+          </article>
+          <article
+            class="photo-card"
+          >
+            <img
+              src="https://commons.wikimedia.org/wiki/Special:FilePath/Flag_of_Turkey.svg"
+              alt="Türkische Flagge mit weißem Halbmond und Stern"
+            >
+            <span>Flagge der Türkei</span>
+          </article>
+        </div>
+      </section>
+
+      <footer>
+        <p>
+          Datenstand: 2026. Einwohnerzahl gerundet nach offiziellen/aktuellen
+          Bevölkerungsangaben; Klima nach Länderprofilen wie CIA World Factbook.
+        </p>
+      </footer>
+    </main>
+    <script src="app.js"></script>
+  </body>
+</html>
