@@ -103,7 +103,19 @@ function drawName() {
   const choices = shuffle([answer, ...shuffle(alternatives).slice(0, 3)]);
   state.current = answer; setTask("Was bedeutet dieses Zeichen?"); setFeedback("Tippe auf den passenden Satz.");
   panel.className = "activity-panel quiz-layout"; panel.innerHTML = `<article class="focus-card"><img src="${image(answer)}" alt="Gesuchtes Piktogramm"><span>Was bedeutet das?</span></article><div class="answer-list"></div>`;
-  choices.forEach(choice => { const b = document.createElement("button"); b.className = "answer-button meaning-answer"; b.innerHTML = `<span class="answer-symbol"><img src="../bilder/symbole/Sprechen-1.png" alt="Sprechen"></span><span>${choice.meaning}</span>`; b.onclick = () => checkAnswer(b, choice.id === answer.id, `${answer.name}. ${answer.meaning}`); panel.querySelector(".answer-list").append(b); });
+  choices.forEach(choice => {
+    const row = document.createElement("div"); row.className = "meaning-answer-row";
+    const speechButton = document.createElement("button");
+    speechButton.type = "button"; speechButton.className = "answer-speech-button";
+    speechButton.innerHTML = `<img src="../bilder/symbole/Sprechen-1.png" alt=""><span class="visually-hidden">Antwort vorlesen</span>`;
+    speechButton.setAttribute("aria-label", `Vorlesen: ${choice.meaning}`);
+    speechButton.onclick = () => { unlockSpeech(); speak(choice.meaning); };
+    const answerButton = document.createElement("button");
+    answerButton.type = "button"; answerButton.className = "answer-button meaning-answer";
+    answerButton.textContent = choice.meaning;
+    answerButton.onclick = () => checkAnswer(answerButton, choice.id === answer.id, `${answer.name}. ${answer.meaning}`);
+    row.append(speechButton, answerButton); panel.querySelector(".answer-list").append(row);
+  });
   announce("Was bedeutet dieses Zeichen?");
 }
 function drawGroup() {

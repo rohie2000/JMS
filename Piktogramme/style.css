@@ -27,6 +27,9 @@ button:focus-visible,input:focus-visible{outline:4px solid #101820;outline-offse
 
 .icon-button{display:inline-flex;align-items:center;justify-content:center;gap:10px}
 .icon-button img{width:36px;height:36px;object-fit:contain;border-radius:8px;background:#fff;padding:3px}
-.meaning-answer{padding:9px 14px 9px 9px}
-.answer-symbol{display:grid;place-items:center;align-self:stretch;flex:0 0 60px;min-height:60px;border-radius:10px;background:#eef3f6}
-.answer-symbol img{width:52px;height:52px;object-fit:contain}
+.meaning-answer-row{display:grid;grid-template-columns:70px 1fr;gap:10px;align-items:stretch}
+.meaning-answer{width:100%}
+.answer-speech-button{display:grid;place-items:center;min-height:70px;padding:7px;border:3px solid transparent;border-radius:14px;background:#fff;box-shadow:var(--shadow)}
+.answer-speech-button:hover{border-color:var(--blue)}
+.answer-speech-button img{width:52px;height:52px;object-fit:contain}
+.visually-hidden{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
