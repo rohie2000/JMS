@@ -5,38 +5,10 @@ const groups = {
   warnung: { name: "Warnzeichen", color: "yellow", short: "Achtung! Hier ist Gefahr." }
 };
 
-const signs = [
-  ["schutzbrille", "Augenschutz benutzen", "gebot", "Gebotszeichen_Augenschutz_benutzen.png", "Setze eine Schutzbrille auf."],
-  ["atemschutz", "Atemschutz benutzen", "gebot", "Gebotszeichen_Atemschutz_benutzen.png", "Benutze eine Atemschutz-Maske."],
-  ["handschutz", "Handschutz benutzen", "gebot", "Gebotszeichen_Handschutz_benutzen.png", "Ziehe Schutz-Handschuhe an."],
-  ["handlauf", "Handlauf benutzen", "gebot", "Gebotszeichen_Handlauf_benutzen.png", "Halte dich am Handlauf fest."],
-  ["warnweste", "Warnweste benutzen", "gebot", "Gebotszeichen_Warnweste_benutzen.png", "Ziehe eine Warnweste an."],
-  ["anleitung", "Anleitung beachten", "gebot", "Gebotszeichen_Anleitung_beachten.png", "Lies zuerst die Anleitung."],
-  ["erstehilfe", "Erste Hilfe", "rettung", "Rettungszeichen_Erste_Hilfe.png", "Hier bekommst du Erste Hilfe."],
-  ["arzt", "Arzt", "rettung", "Rettungszeichen_Arzt.png", "Hier findest du einen Arzt."],
-  ["aed", "Defibrillator", "rettung", "Rettungszeichen_AED.png", "Hier ist ein Gerät für den Notfall."],
-  ["notdusche", "Not-Dusche", "rettung", "Rettungszeichen_Notdusche.png", "Hier ist eine Dusche für den Notfall."],
-  ["nottelefon", "Not-Telefon", "rettung", "Rettungszeichen_Nottelefon.png", "Hier kannst du im Notfall anrufen."],
-  ["sammelstelle", "Sammelstelle", "rettung", "Rettungszeichen_Sammelstelle.png", "Hier treffen sich alle im Notfall."],
-  ["brandmelder", "Brandmelder", "brand", "Brandschutzzeichen_Brandmelder.png", "Drücke hier, wenn es brennt."],
-  ["brandtelefon", "Brandmelde-Telefon", "brand", "Brandschutzzeichen_Brandmeldetelefon.png", "Mit diesem Telefon meldest du ein Feuer."],
-  ["feuerleiter", "Feuerleiter", "brand", "Brandschutzzeichen_Feuerleiter.png", "Hier ist eine Leiter für den Brandfall."],
-  ["feueraufzug", "Feuerwehr-Aufzug", "brand", "Brandschutzzeichen_Feuerwehraufzug.png", "Diesen Aufzug benutzt die Feuerwehr."],
-  ["brandpfeil", "Weg zum Brandschutz", "brand", "Brandschutzzeichen_Pfeil_links.png", "Der Pfeil zeigt zu einem Gerät gegen Feuer."],
-  ["allgemeingefahr", "Allgemeine Warnung", "warnung", "Warnung_allgemein.png", "Achtung! Hier ist eine Gefahr."],
-  ["strom", "Elektrische Spannung", "warnung", "Warnung_vor_elektrischer_Spannung.png", "Achtung! Strom kann gefährlich sein."],
-  ["wachhund", "Wachhund", "warnung", "Warnung_vor_dem_Wachhund.png", "Achtung! Hier ist ein Wachhund."],
-  ["absturz", "Absturz-Gefahr", "warnung", "Warnung_vor_Absturzgefahr.png", "Achtung! Du kannst hier tief fallen."],
-  ["gas", "Gasflaschen", "warnung", "Warnung_vor_Gasflaschen.png", "Achtung! Hier stehen Gasflaschen."],
-  ["heiss", "Heiße Oberfläche", "warnung", "Warnung_vor_heisser_Oberflaeche.png", "Achtung! Die Oberfläche ist heiß."],
-  ["rutsch", "Rutsch-Gefahr", "warnung", "Warnung_vor_Rutschgefahr.png", "Achtung! Du kannst hier ausrutschen."],
-  ["quetsch", "Quetsch-Gefahr", "warnung", "Warnung_vor_Quetschgefahr.png", "Achtung! Etwas kann dich einquetschen."]
-].map(([id, name, group, file, meaning]) => ({ id, name, group, file, meaning }));
-
 const state = {
   mode: "discover", score: 0, selectedGroups: new Set(Object.keys(groups)),
   selectedSigns: new Set(signs.map(sign => sign.id)), current: null, memorySequence: [], memoryIndex: 0,
-  voices: [], speechUnlocked: false
+  voices: [], speechUnlocked: false, currentUtterance: null, speechTimer: null
 };
 
 const $ = selector => document.querySelector(selector);
@@ -51,16 +23,32 @@ function activeSigns() {
 function shuffle(items) { return [...items].sort(() => Math.random() - .5); }
 function random(items) { return items[Math.floor(Math.random() * items.length)]; }
 function image(sign) { return `Bilder/${encodeURIComponent(sign.file)}`; }
-function loadVoices() { state.voices = window.speechSynthesis?.getVoices?.() || []; }
-function speak(text) {
+function loadVoices() { state.voices = window.speechSynthesis?.getVoices?.() || []; return state.voices; }
+function selectedGermanVoice() {
+  return state.voices.find(voice => /^de-DE$/i.test(voice.lang) && voice.localService)
+    || state.voices.find(voice => /^de-DE$/i.test(voice.lang))
+    || state.voices.find(voice => /^de/i.test(voice.lang))
+    || null;
+}
+function speak(text, retry = true) {
   state.currentSpeech = text;
-  if (!text || !("speechSynthesis" in window)) return;
-  if (!state.speechUnlocked) return;
-  speechSynthesis.cancel();
+  if (!text || !("speechSynthesis" in window) || !state.speechUnlocked) return;
+  clearTimeout(state.speechTimer);
+  const synth = window.speechSynthesis;
+  synth.cancel();
+  synth.resume();
   const utterance = new SpeechSynthesisUtterance(text);
   utterance.lang = "de-DE"; utterance.rate = .88;
-  utterance.voice = state.voices.find(v => v.lang.toLowerCase() === "de-de") || state.voices.find(v => v.lang.toLowerCase().startsWith("de")) || null;
-  speechSynthesis.speak(utterance);
+  utterance.volume = 1;
+  utterance.voice = selectedGermanVoice();
+  utterance.onerror = event => {
+    if (retry && event.error !== "canceled" && event.error !== "interrupted") {
+      state.speechTimer = setTimeout(() => { loadVoices(); speak(text, false); }, 250);
+    }
+  };
+  state.currentUtterance = utterance;
+  // Ein kurzer Abstand nach cancel() verhindert, dass Edge die neue Ansage verschluckt.
+  state.speechTimer = setTimeout(() => { synth.resume(); synth.speak(utterance); }, 80);
 }
 function unlockSpeech() { state.speechUnlocked = true; loadVoices(); window.speechSynthesis?.resume?.(); }
 function announce(text) { state.currentSpeech = text; if (autoSpeak.checked) speak(text); }
@@ -110,10 +98,12 @@ function drawDiscover() {
   state.currentSpeech = "Tippe auf ein Zeichen. Du hörst die Bedeutung.";
 }
 function drawName() {
-  const all = activeSigns(), answer = random(all), choices = shuffle([answer, ...shuffle(all.filter(s => s.id !== answer.id)).slice(0, 3)]);
+  const all = activeSigns(), answer = random(all);
+  const alternatives = all.filter(sign => sign.id !== answer.id && sign.meaning !== answer.meaning);
+  const choices = shuffle([answer, ...shuffle(alternatives).slice(0, 3)]);
   state.current = answer; setTask("Was bedeutet dieses Zeichen?"); setFeedback("Tippe auf den passenden Satz.");
   panel.className = "activity-panel quiz-layout"; panel.innerHTML = `<article class="focus-card"><img src="${image(answer)}" alt="Gesuchtes Piktogramm"><span>Was bedeutet das?</span></article><div class="answer-list"></div>`;
-  choices.forEach(choice => { const b = document.createElement("button"); b.className = "answer-button"; b.textContent = choice.meaning; b.onclick = () => checkAnswer(b, choice.id === answer.id, `${answer.name}. ${answer.meaning}`); panel.querySelector(".answer-list").append(b); });
+  choices.forEach(choice => { const b = document.createElement("button"); b.className = "answer-button meaning-answer"; b.innerHTML = `<span class="answer-symbol"><img src="../bilder/symbole/Sprechen-1.png" alt="Sprechen"></span><span>${choice.meaning}</span>`; b.onclick = () => checkAnswer(b, choice.id === answer.id, `${answer.name}. ${answer.meaning}`); panel.querySelector(".answer-list").append(b); });
   announce("Was bedeutet dieses Zeichen?");
 }
 function drawGroup() {
@@ -167,6 +157,7 @@ $("#repeat").onclick = () => { unlockSpeech(); speak(state.currentSpeech || task
 $("#next").onclick = () => { unlockSpeech(); nextTask(); };
 $("#voice-test").onclick = () => { unlockSpeech(); speak("Hallo! Ich lese dir die Aufgaben vor."); setFeedback("Die Stimme ist bereit.", "good"); };
 $("#choose-signs").onclick = () => { const picker = $("#sign-picker"); picker.hidden = !picker.hidden; $("#choose-signs").textContent = picker.hidden ? "Zeichen auswählen" : "Auswahl schließen"; if (!picker.hidden) renderPicker(); };
-window.addEventListener("pointerdown", unlockSpeech, { once: true });
+// Touchscreens und Edge-Kioskgeräte liefern je nach Konfiguration unterschiedliche Eingabe-Ereignisse.
+["pointerdown", "touchstart", "keydown", "click"].forEach(type => window.addEventListener(type, unlockSpeech, { passive: true }));
 if ("speechSynthesis" in window) { loadVoices(); speechSynthesis.addEventListener("voiceschanged", loadVoices); }
 renderCategoryChips(); updateSelectionInfo(); drawDiscover();
