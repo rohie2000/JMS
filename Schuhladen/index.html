@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Schuhladen-Training</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <main class="app-shell">
+      <section class="topbar" aria-labelledby="app-title">
+        <div>
+          <h1 id="app-title">Schuhladen-Training</h1>
+          <p class="intro">Schuhe ansehen, Farben erkennen, Groessen vergleichen und passende Regale im Laden finden.</p>
+        </div>
+
+        <div class="voice-panel" aria-label="Sprachausgabe">
+          <button class="secondary-button" id="voice-test" type="button">Stimme testen</button>
+          <label class="voice-toggle">
+            <input id="auto-speak" type="checkbox" checked>
+            <span>Automatisch sprechen</span>
+          </label>
+        </div>
+      </section>
+
+      <nav class="mode-tabs" aria-label="Lernmodus auswaehlen">
+        <button class="tab active" type="button" data-mode="learn">Lernen</button>
+        <button class="tab" type="button" data-mode="color">Nach Farbe</button>
+        <button class="tab" type="button" data-mode="size">Nach Groesse</button>
+        <button class="tab" type="button" data-mode="mixed">Regalauftrag</button>
+        <button class="tab" type="button" data-mode="sequence">Ladenrunde</button>
+      </nav>
+
+      <section class="status-band" aria-live="polite">
+        <div>
+          <p class="status-label">Aktuelle Aufgabe</p>
+          <p class="task-text" id="task-text">Tippe einen Schuh an und hoere Farbe und Groesse.</p>
+        </div>
+        <div class="score-box">
+          <span id="score">0</span>
+          <small>Punkte</small>
+        </div>
+      </section>
+
+      <section class="controls" aria-label="Training steuern">
+        <button class="primary-button" id="repeat" type="button">Nochmal hoeren</button>
+        <button class="secondary-button" id="next" type="button">Neue Aufgabe</button>
+        <select id="level-filter" aria-label="Schwierigkeit auswaehlen">
+          <option value="starter">Start: 3 Farben</option>
+          <option value="more">Mehr Farben</option>
+          <option value="all">Alle Regale</option>
+        </select>
+      </section>
+
+      <section class="activity-panel" id="activity-panel" aria-label="Lernbereich"></section>
+      <section class="feedback" id="feedback" aria-live="assertive">Bereit.</section>
+
+      <section class="coach-box" aria-labelledby="coach-title">
+        <div>
+          <p class="eyebrow">Uebungsideen</p>
+          <h2 id="coach-title">Sortieren im Schuhladen</h2>
+        </div>
+        <div class="coach-grid">
+          <article>
+            <h3>Erst laut benennen</h3>
+            <p>Farbe und Groesse gemeinsam sagen: roter Schuh, Groesse 28, kleines Regal.</p>
+          </article>
+          <article>
+            <h3>Dann Regal finden</h3>
+            <p>Ein Auftrag wird vorgelesen. Die passende Karte wird in das richtige Regal gelegt.</p>
+          </article>
+          <article>
+            <h3>Im Raum nachspielen</h3>
+            <p>Mit echten Schuhen oder Bildkarten koennen die Regale auf Tischen nachgebaut werden.</p>
+          </article>
+        </div>
+      </section>
+
+      <footer class="site-credit">
+        Entwickelt und Erstellt mit Schuelern der Jakob-Muth-Schule Nuernberg - Rolfy Hientz -
+        <a href="mailto:hientzr@jms.lhnbg.de">hientzr@jms.lhnbg.de</a>
+      </footer>
+    </main>
+
+    <script src="app.js"></script>
+  </body>
+</html>
